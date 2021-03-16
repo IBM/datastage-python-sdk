@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Python client library for the IBM Cloud MySDK Services"""
+"""IBM DataStage SDK for Python"""
 
 from ibm_cloud_sdk_core import IAMTokenManager, DetailedResponse, BaseService, ApiException
 
 from .common import get_sdk_headers
 from .version import __version__
-from .example_service_v1 import ExampleServiceV1
+# from .example_service_v1 import ExampleServiceV1
