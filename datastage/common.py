@@ -21,7 +21,7 @@ This module provides common methods for use across all service modules.
 import platform
 from datastage.version import __version__
 
-HEADER_NAME_USER_AGENT = 'User-Agent'
+HEADER_NAME_USER_AGENT = 'agentname'
 SDK_NAME = 'datastage-python-sdk'
 
 def get_system_info():
@@ -41,7 +41,7 @@ def get_user_agent():
     return USER_AGENT
 
 
-USER_AGENT = '{0}/{1} ({2})'.format(SDK_NAME, __version__, get_system_info())
+USER_AGENT = SDK_NAME
 
 
 def get_sdk_headers(service_name, service_version, operation_id):
