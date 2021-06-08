@@ -38,9 +38,9 @@ Changes might occur which impact applications that use this SDK.
 The IBM Cloud Datastage Python SDK allows developers to programmatically interact with the following
 IBM Cloud services:
 
-Service Name | Imported Class Name
---- | ---
-<!-- [Example Service](https://cloud.ibm.com/apidocs/example-service) | exampleservicev1 -->
+Service Name | Module Name | Service Class Name
+--- | --- | ---
+[DataStage](https://cloud.ibm.com/apidocs/datastage) | datastage_v3 | DatastageV3
 
 ## Prerequisites
 
@@ -52,16 +52,10 @@ Service Name | Imported Class Name
 
 ## Installation
 
-To install, use `pip` or `easy_install`:
+To install, use `pip`:
 
 ```bash
 pip install --upgrade "datastage>=0.0.1"
-```
-
-or
-
-```bash
-easy_install --upgrade "datastage>=0.0.1"
 ```
 
 ## Using the SDK
