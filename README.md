@@ -40,7 +40,7 @@ IBM Cloud services:
 
 Service Name | Module Name | Service Class Name
 --- | --- | ---
-[DataStage](https://cloud.ibm.com/apidocs/case-management) | datastage_v3 | DatastageV3
+[DataStage](https://cloud.ibm.com/apidocs/datastage) | datastage_v3 | DatastageV3
 
 ## Prerequisites
 
