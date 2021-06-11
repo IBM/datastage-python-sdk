@@ -19,6 +19,7 @@ Unit Tests for DatastageV3
 
 from datetime import datetime, timezone
 from ibm_cloud_sdk_core.authenticators.no_auth_authenticator import NoAuthAuthenticator
+from ibm_cloud_sdk_core.utils import datetime_to_string, string_to_datetime
 import inspect
 import io
 import json
@@ -31,21 +32,21 @@ import urllib
 from datastage.datastage_v3 import *
 
 
-service = DatastageV3(
+_service = DatastageV3(
     authenticator=NoAuthAuthenticator()
     )
 
-base_url = 'https://datastage.cloud.ibm.com/data_intg'
-service.set_service_url(base_url)
+_base_url = 'https://datastage.cloud.ibm.com/data_intg'
+_service.set_service_url(_base_url)
 
 ##############################################################################
 # Start of Service: DataStageFlows
 ##############################################################################
 # region
 
-class TestDatastageFlowsDelete():
+class TestDeleteDatastageFlows():
     """
-    Test Class for datastage_flows_delete
+    Test Class for delete_datastage_flows
     """
 
     def preprocess_url(self, request_url: str):
@@ -58,12 +59,12 @@ class TestDatastageFlowsDelete():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_datastage_flows_delete_all_params(self):
+    def test_delete_datastage_flows_all_params(self):
         """
-        datastage_flows_delete()
+        delete_datastage_flows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
         responses.add(responses.DELETE,
                       url,
                       status=202)
@@ -75,7 +76,7 @@ class TestDatastageFlowsDelete():
         force = True
 
         # Invoke method
-        response = service.datastage_flows_delete(
+        response = _service.delete_datastage_flows(
             id,
             catalog_id=catalog_id,
             project_id=project_id,
@@ -96,12 +97,12 @@ class TestDatastageFlowsDelete():
 
 
     @responses.activate
-    def test_datastage_flows_delete_required_params(self):
+    def test_delete_datastage_flows_required_params(self):
         """
-        test_datastage_flows_delete_required_params()
+        test_delete_datastage_flows_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
         responses.add(responses.DELETE,
                       url,
                       status=202)
@@ -110,7 +111,7 @@ class TestDatastageFlowsDelete():
         id = ['testString']
 
         # Invoke method
-        response = service.datastage_flows_delete(
+        response = _service.delete_datastage_flows(
             id,
             headers={}
         )
@@ -125,12 +126,12 @@ class TestDatastageFlowsDelete():
 
 
     @responses.activate
-    def test_datastage_flows_delete_value_error(self):
+    def test_delete_datastage_flows_value_error(self):
         """
-        test_datastage_flows_delete_value_error()
+        test_delete_datastage_flows_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
         responses.add(responses.DELETE,
                       url,
                       status=202)
@@ -145,13 +146,13 @@ class TestDatastageFlowsDelete():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.datastage_flows_delete(**req_copy)
+                _service.delete_datastage_flows(**req_copy)
 
 
 
-class TestDatastageFlowsList():
+class TestListDatastageFlows():
     """
-    Test Class for datastage_flows_list
+    Test Class for list_datastage_flows
     """
 
     def preprocess_url(self, request_url: str):
@@ -164,13 +165,13 @@ class TestDatastageFlowsList():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_datastage_flows_list_all_params(self):
+    def test_list_datastage_flows_all_params(self):
         """
-        datastage_flows_list()
+        list_datastage_flows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
-        mock_response = '{"data_flows": [{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}], "first": {"href": "href"}, "last": {"href": "href"}, "limit": 5, "next": {"href": "href"}, "prev": {"href": "href"}, "total_count": 11}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
+        mock_response = '{"data_flows": [{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}], "first": {"href": "href"}, "last": {"href": "href"}, "limit": 5, "next": {"href": "href"}, "prev": {"href": "href"}, "total_count": 11}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -187,7 +188,7 @@ class TestDatastageFlowsList():
         entity_description = 'testString'
 
         # Invoke method
-        response = service.datastage_flows_list(
+        response = _service.list_datastage_flows(
             catalog_id=catalog_id,
             project_id=project_id,
             sort=sort,
@@ -214,13 +215,13 @@ class TestDatastageFlowsList():
 
 
     @responses.activate
-    def test_datastage_flows_list_required_params(self):
+    def test_list_datastage_flows_required_params(self):
         """
-        test_datastage_flows_list_required_params()
+        test_list_datastage_flows_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
-        mock_response = '{"data_flows": [{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}], "first": {"href": "href"}, "last": {"href": "href"}, "limit": 5, "next": {"href": "href"}, "prev": {"href": "href"}, "total_count": 11}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
+        mock_response = '{"data_flows": [{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}], "first": {"href": "href"}, "last": {"href": "href"}, "limit": 5, "next": {"href": "href"}, "prev": {"href": "href"}, "total_count": 11}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -228,7 +229,7 @@ class TestDatastageFlowsList():
                       status=200)
 
         # Invoke method
-        response = service.datastage_flows_list()
+        response = _service.list_datastage_flows()
 
 
         # Check for correct operation
@@ -236,9 +237,9 @@ class TestDatastageFlowsList():
         assert response.status_code == 200
 
 
-class TestDatastageFlowsCreate():
+class TestCreateDatastageFlows():
     """
-    Test Class for datastage_flows_create
+    Test Class for create_datastage_flows
     """
 
     def preprocess_url(self, request_url: str):
@@ -251,13 +252,13 @@ class TestDatastageFlowsCreate():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_datastage_flows_create_all_params(self):
+    def test_create_datastage_flows_all_params(self):
         """
-        datastage_flows_create()
+        create_datastage_flows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -267,8 +268,9 @@ class TestDatastageFlowsCreate():
         # Construct a dict representation of a Pipelines model
         pipelines_model = {}
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
@@ -276,7 +278,7 @@ class TestDatastageFlowsCreate():
         pipeline_json_model = {}
         pipeline_json_model['app_data'] = { 'foo': 'bar' }
         pipeline_json_model['doc_type'] = 'pipeline'
-        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model['parameters'] = { 'foo': 'bar' }
@@ -294,7 +296,7 @@ class TestDatastageFlowsCreate():
         asset_category = 'system'
 
         # Invoke method
-        response = service.datastage_flows_create(
+        response = _service.create_datastage_flows(
             data_intg_flow_name,
             pipeline_flows=pipeline_flows,
             catalog_id=catalog_id,
@@ -319,13 +321,13 @@ class TestDatastageFlowsCreate():
 
 
     @responses.activate
-    def test_datastage_flows_create_required_params(self):
+    def test_create_datastage_flows_required_params(self):
         """
-        test_datastage_flows_create_required_params()
+        test_create_datastage_flows_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -335,8 +337,9 @@ class TestDatastageFlowsCreate():
         # Construct a dict representation of a Pipelines model
         pipelines_model = {}
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
@@ -344,7 +347,7 @@ class TestDatastageFlowsCreate():
         pipeline_json_model = {}
         pipeline_json_model['app_data'] = { 'foo': 'bar' }
         pipeline_json_model['doc_type'] = 'pipeline'
-        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model['parameters'] = { 'foo': 'bar' }
@@ -359,7 +362,7 @@ class TestDatastageFlowsCreate():
         pipeline_flows = pipeline_json_model
 
         # Invoke method
-        response = service.datastage_flows_create(
+        response = _service.create_datastage_flows(
             data_intg_flow_name,
             pipeline_flows=pipeline_flows,
             headers={}
@@ -378,13 +381,13 @@ class TestDatastageFlowsCreate():
 
 
     @responses.activate
-    def test_datastage_flows_create_value_error(self):
+    def test_create_datastage_flows_value_error(self):
         """
-        test_datastage_flows_create_value_error()
+        test_create_datastage_flows_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -394,8 +397,9 @@ class TestDatastageFlowsCreate():
         # Construct a dict representation of a Pipelines model
         pipelines_model = {}
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
@@ -403,7 +407,7 @@ class TestDatastageFlowsCreate():
         pipeline_json_model = {}
         pipeline_json_model['app_data'] = { 'foo': 'bar' }
         pipeline_json_model['doc_type'] = 'pipeline'
-        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model['parameters'] = { 'foo': 'bar' }
@@ -424,13 +428,13 @@ class TestDatastageFlowsCreate():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.datastage_flows_create(**req_copy)
+                _service.create_datastage_flows(**req_copy)
 
 
 
-class TestDatastageFlowsGet():
+class TestGetDatastageFlows():
     """
-    Test Class for datastage_flows_get
+    Test Class for get_datastage_flows
     """
 
     def preprocess_url(self, request_url: str):
@@ -443,13 +447,13 @@ class TestDatastageFlowsGet():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_datastage_flows_get_all_params(self):
+    def test_get_datastage_flows_all_params(self):
         """
-        datastage_flows_get()
+        get_datastage_flows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString')
-        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString')
+        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow.", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "name": "ContainerC1", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -462,7 +466,7 @@ class TestDatastageFlowsGet():
         project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
 
         # Invoke method
-        response = service.datastage_flows_get(
+        response = _service.get_datastage_flows(
             data_intg_flow_id,
             catalog_id=catalog_id,
             project_id=project_id,
@@ -480,13 +484,13 @@ class TestDatastageFlowsGet():
 
 
     @responses.activate
-    def test_datastage_flows_get_required_params(self):
+    def test_get_datastage_flows_required_params(self):
         """
-        test_datastage_flows_get_required_params()
+        test_get_datastage_flows_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString')
-        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString')
+        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow.", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "name": "ContainerC1", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -497,7 +501,7 @@ class TestDatastageFlowsGet():
         data_intg_flow_id = 'testString'
 
         # Invoke method
-        response = service.datastage_flows_get(
+        response = _service.get_datastage_flows(
             data_intg_flow_id,
             headers={}
         )
@@ -508,13 +512,13 @@ class TestDatastageFlowsGet():
 
 
     @responses.activate
-    def test_datastage_flows_get_value_error(self):
+    def test_get_datastage_flows_value_error(self):
         """
-        test_datastage_flows_get_value_error()
+        test_get_datastage_flows_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString')
-        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString')
+        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow.", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "name": "ContainerC1", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -531,13 +535,13 @@ class TestDatastageFlowsGet():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.datastage_flows_get(**req_copy)
+                _service.get_datastage_flows(**req_copy)
 
 
 
-class TestDatastageFlowsUpdate():
+class TestUpdateDatastageFlows():
     """
-    Test Class for datastage_flows_update
+    Test Class for update_datastage_flows
     """
 
     def preprocess_url(self, request_url: str):
@@ -550,13 +554,13 @@ class TestDatastageFlowsUpdate():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_datastage_flows_update_all_params(self):
+    def test_update_datastage_flows_all_params(self):
         """
-        datastage_flows_update()
+        update_datastage_flows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -566,8 +570,9 @@ class TestDatastageFlowsUpdate():
         # Construct a dict representation of a Pipelines model
         pipelines_model = {}
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
@@ -575,7 +580,7 @@ class TestDatastageFlowsUpdate():
         pipeline_json_model = {}
         pipeline_json_model['app_data'] = { 'foo': 'bar' }
         pipeline_json_model['doc_type'] = 'pipeline'
-        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model['parameters'] = { 'foo': 'bar' }
@@ -593,7 +598,7 @@ class TestDatastageFlowsUpdate():
         project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
 
         # Invoke method
-        response = service.datastage_flows_update(
+        response = _service.update_datastage_flows(
             data_intg_flow_id,
             data_intg_flow_name,
             pipeline_flows=pipeline_flows,
@@ -617,13 +622,13 @@ class TestDatastageFlowsUpdate():
 
 
     @responses.activate
-    def test_datastage_flows_update_required_params(self):
+    def test_update_datastage_flows_required_params(self):
         """
-        test_datastage_flows_update_required_params()
+        test_update_datastage_flows_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -633,8 +638,9 @@ class TestDatastageFlowsUpdate():
         # Construct a dict representation of a Pipelines model
         pipelines_model = {}
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
@@ -642,7 +648,7 @@ class TestDatastageFlowsUpdate():
         pipeline_json_model = {}
         pipeline_json_model['app_data'] = { 'foo': 'bar' }
         pipeline_json_model['doc_type'] = 'pipeline'
-        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model['parameters'] = { 'foo': 'bar' }
@@ -658,7 +664,7 @@ class TestDatastageFlowsUpdate():
         pipeline_flows = pipeline_json_model
 
         # Invoke method
-        response = service.datastage_flows_update(
+        response = _service.update_datastage_flows(
             data_intg_flow_id,
             data_intg_flow_name,
             pipeline_flows=pipeline_flows,
@@ -678,13 +684,13 @@ class TestDatastageFlowsUpdate():
 
 
     @responses.activate
-    def test_datastage_flows_update_value_error(self):
+    def test_update_datastage_flows_value_error(self):
         """
-        test_datastage_flows_update_value_error()
+        test_update_datastage_flows_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -694,8 +700,9 @@ class TestDatastageFlowsUpdate():
         # Construct a dict representation of a Pipelines model
         pipelines_model = {}
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
@@ -703,7 +710,7 @@ class TestDatastageFlowsUpdate():
         pipeline_json_model = {}
         pipeline_json_model['app_data'] = { 'foo': 'bar' }
         pipeline_json_model['doc_type'] = 'pipeline'
-        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model['parameters'] = { 'foo': 'bar' }
@@ -726,13 +733,13 @@ class TestDatastageFlowsUpdate():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.datastage_flows_update(**req_copy)
+                _service.update_datastage_flows(**req_copy)
 
 
 
-class TestDatastageFlowsClone():
+class TestCloneDatastageFlows():
     """
-    Test Class for datastage_flows_clone
+    Test Class for clone_datastage_flows
     """
 
     def preprocess_url(self, request_url: str):
@@ -745,13 +752,13 @@ class TestDatastageFlowsClone():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_datastage_flows_clone_all_params(self):
+    def test_clone_datastage_flows_all_params(self):
         """
-        datastage_flows_clone()
+        clone_datastage_flows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString/clone')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString/clone')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -764,7 +771,7 @@ class TestDatastageFlowsClone():
         project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
 
         # Invoke method
-        response = service.datastage_flows_clone(
+        response = _service.clone_datastage_flows(
             data_intg_flow_id,
             catalog_id=catalog_id,
             project_id=project_id,
@@ -782,13 +789,13 @@ class TestDatastageFlowsClone():
 
 
     @responses.activate
-    def test_datastage_flows_clone_required_params(self):
+    def test_clone_datastage_flows_required_params(self):
         """
-        test_datastage_flows_clone_required_params()
+        test_clone_datastage_flows_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString/clone')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString/clone')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -799,7 +806,7 @@ class TestDatastageFlowsClone():
         data_intg_flow_id = 'testString'
 
         # Invoke method
-        response = service.datastage_flows_clone(
+        response = _service.clone_datastage_flows(
             data_intg_flow_id,
             headers={}
         )
@@ -810,13 +817,13 @@ class TestDatastageFlowsClone():
 
 
     @responses.activate
-    def test_datastage_flows_clone_value_error(self):
+    def test_clone_datastage_flows_value_error(self):
         """
-        test_datastage_flows_clone_value_error()
+        test_clone_datastage_flows_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/data_intg_flows/testString/clone')
-        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/testString/clone')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -833,13 +840,13 @@ class TestDatastageFlowsClone():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.datastage_flows_clone(**req_copy)
+                _service.clone_datastage_flows(**req_copy)
 
 
 
-class TestDatastageFlowsCompile():
+class TestCompileDatastageFlows():
     """
-    Test Class for datastage_flows_compile
+    Test Class for compile_datastage_flows
     """
 
     def preprocess_url(self, request_url: str):
@@ -852,12 +859,12 @@ class TestDatastageFlowsCompile():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_datastage_flows_compile_all_params(self):
+    def test_compile_datastage_flows_all_params(self):
         """
-        datastage_flows_compile()
+        compile_datastage_flows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/ds_codegen/compile/testString')
+        url = self.preprocess_url(_base_url + '/v3/ds_codegen/compile/testString')
         mock_response = '{"message": {"anyKey": "anyValue"}, "type": "type"}'
         responses.add(responses.POST,
                       url,
@@ -872,7 +879,7 @@ class TestDatastageFlowsCompile():
         runtime_type = 'testString'
 
         # Invoke method
-        response = service.datastage_flows_compile(
+        response = _service.compile_datastage_flows(
             data_intg_flow_id,
             catalog_id=catalog_id,
             project_id=project_id,
@@ -892,12 +899,12 @@ class TestDatastageFlowsCompile():
 
 
     @responses.activate
-    def test_datastage_flows_compile_required_params(self):
+    def test_compile_datastage_flows_required_params(self):
         """
-        test_datastage_flows_compile_required_params()
+        test_compile_datastage_flows_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/ds_codegen/compile/testString')
+        url = self.preprocess_url(_base_url + '/v3/ds_codegen/compile/testString')
         mock_response = '{"message": {"anyKey": "anyValue"}, "type": "type"}'
         responses.add(responses.POST,
                       url,
@@ -909,7 +916,7 @@ class TestDatastageFlowsCompile():
         data_intg_flow_id = 'testString'
 
         # Invoke method
-        response = service.datastage_flows_compile(
+        response = _service.compile_datastage_flows(
             data_intg_flow_id,
             headers={}
         )
@@ -920,12 +927,12 @@ class TestDatastageFlowsCompile():
 
 
     @responses.activate
-    def test_datastage_flows_compile_value_error(self):
+    def test_compile_datastage_flows_value_error(self):
         """
-        test_datastage_flows_compile_value_error()
+        test_compile_datastage_flows_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/ds_codegen/compile/testString')
+        url = self.preprocess_url(_base_url + '/v3/ds_codegen/compile/testString')
         mock_response = '{"message": {"anyKey": "anyValue"}, "type": "type"}'
         responses.add(responses.POST,
                       url,
@@ -943,7 +950,7 @@ class TestDatastageFlowsCompile():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.datastage_flows_compile(**req_copy)
+                _service.compile_datastage_flows(**req_copy)
 
 
 
@@ -953,13 +960,13 @@ class TestDatastageFlowsCompile():
 ##############################################################################
 
 ##############################################################################
-# Start of Service: Migration
+# Start of Service: DataStageSubflows
 ##############################################################################
 # region
 
-class TestMigrationCreate():
+class TestDeleteDatastageSubflows():
     """
-    Test Class for migration_create
+    Test Class for delete_datastage_subflows
     """
 
     def preprocess_url(self, request_url: str):
@@ -972,13 +979,820 @@ class TestMigrationCreate():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_migration_create_all_params(self):
+    def test_delete_datastage_subflows_all_params(self):
         """
-        migration_create()
+        delete_datastage_subflows()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports')
-        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "px_containers_total": 19, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        responses.add(responses.DELETE,
+                      url,
+                      status=202)
+
+        # Set up parameter values
+        id = ['testString']
+        catalog_id = 'testString'
+        project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
+
+        # Invoke method
+        response = _service.delete_datastage_subflows(
+            id,
+            catalog_id=catalog_id,
+            project_id=project_id,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 202
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'id={}'.format(','.join(id)) in query_string
+        assert 'catalog_id={}'.format(catalog_id) in query_string
+        assert 'project_id={}'.format(project_id) in query_string
+
+
+    @responses.activate
+    def test_delete_datastage_subflows_required_params(self):
+        """
+        test_delete_datastage_subflows_required_params()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        responses.add(responses.DELETE,
+                      url,
+                      status=202)
+
+        # Set up parameter values
+        id = ['testString']
+
+        # Invoke method
+        response = _service.delete_datastage_subflows(
+            id,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 202
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'id={}'.format(','.join(id)) in query_string
+
+
+    @responses.activate
+    def test_delete_datastage_subflows_value_error(self):
+        """
+        test_delete_datastage_subflows_value_error()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        responses.add(responses.DELETE,
+                      url,
+                      status=202)
+
+        # Set up parameter values
+        id = ['testString']
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "id": id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.delete_datastage_subflows(**req_copy)
+
+
+
+class TestListDatastageSubflows():
+    """
+    Test Class for list_datastage_subflows
+    """
+
+    def preprocess_url(self, request_url: str):
+        """
+        Preprocess the request URL to ensure the mock response will be found.
+        """
+        if re.fullmatch('.*/+', request_url) is None:
+            return request_url
+        else:
+            return re.compile(request_url.rstrip('/') + '/+')
+
+    @responses.activate
+    def test_list_datastage_subflows_all_params(self):
+        """
+        list_datastage_subflows()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        mock_response = '{"data_flows": [{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}], "first": {"href": "href"}, "last": {"href": "href"}, "limit": 5, "next": {"href": "href"}, "prev": {"href": "href"}, "total_count": 11}'
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=200)
+
+        # Set up parameter values
+        catalog_id = 'testString'
+        project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
+        sort = 'testString'
+        start = 'testString'
+        limit = 100
+        entity_name = 'testString'
+        entity_description = 'testString'
+
+        # Invoke method
+        response = _service.list_datastage_subflows(
+            catalog_id=catalog_id,
+            project_id=project_id,
+            sort=sort,
+            start=start,
+            limit=limit,
+            entity_name=entity_name,
+            entity_description=entity_description,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'catalog_id={}'.format(catalog_id) in query_string
+        assert 'project_id={}'.format(project_id) in query_string
+        assert 'sort={}'.format(sort) in query_string
+        assert 'start={}'.format(start) in query_string
+        assert 'limit={}'.format(limit) in query_string
+        assert 'entity.name={}'.format(entity_name) in query_string
+        assert 'entity.description={}'.format(entity_description) in query_string
+
+
+    @responses.activate
+    def test_list_datastage_subflows_required_params(self):
+        """
+        test_list_datastage_subflows_required_params()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        mock_response = '{"data_flows": [{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}], "first": {"href": "href"}, "last": {"href": "href"}, "limit": 5, "next": {"href": "href"}, "prev": {"href": "href"}, "total_count": 11}'
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=200)
+
+        # Invoke method
+        response = _service.list_datastage_subflows()
+
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+
+
+class TestCreateDatastageSubflows():
+    """
+    Test Class for create_datastage_subflows
+    """
+
+    def preprocess_url(self, request_url: str):
+        """
+        Preprocess the request URL to ensure the mock response will be found.
+        """
+        if re.fullmatch('.*/+', request_url) is None:
+            return request_url
+        else:
+            return re.compile(request_url.rstrip('/') + '/+')
+
+    @responses.activate
+    def test_create_datastage_subflows_all_params(self):
+        """
+        create_datastage_subflows()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.POST,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Construct a dict representation of a Pipelines model
+        pipelines_model = {}
+        pipelines_model['app_data'] = { 'foo': 'bar' }
+        pipelines_model['description'] = 'A test DataStage flow.'
+        pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
+        pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
+        pipelines_model['runtime_ref'] = 'pxOsh'
+
+        # Construct a dict representation of a PipelineJson model
+        pipeline_json_model = {}
+        pipeline_json_model['app_data'] = { 'foo': 'bar' }
+        pipeline_json_model['doc_type'] = 'pipeline'
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
+        pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
+        pipeline_json_model['parameters'] = { 'foo': 'bar' }
+        pipeline_json_model['pipelines'] = [pipelines_model]
+        pipeline_json_model['primary_pipeline'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipeline_json_model['runtimes'] = [{'id':'pxOsh', 'name':'pxOsh'}]
+        pipeline_json_model['schemas'] = [{'fields':[{'app_data':{'is_unicode_string':False, 'odbc_type':'INTEGER', 'type_code':'INT32'}, 'metadata':{'decimal_precision':6, 'decimal_scale':0, 'is_key':False, 'is_signed':False, 'item_index':0, 'max_length':6, 'min_length':0}, 'name':'ID', 'nullable':False, 'type':'integer'}], 'id':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}]
+        pipeline_json_model['version'] = '3.0'
+
+        # Set up parameter values
+        data_intg_subflow_name = 'testString'
+        pipeline_flows = pipeline_json_model
+        catalog_id = 'testString'
+        project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
+        asset_category = 'system'
+
+        # Invoke method
+        response = _service.create_datastage_subflows(
+            data_intg_subflow_name,
+            pipeline_flows=pipeline_flows,
+            catalog_id=catalog_id,
+            project_id=project_id,
+            asset_category=asset_category,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'data_intg_subflow_name={}'.format(data_intg_subflow_name) in query_string
+        assert 'catalog_id={}'.format(catalog_id) in query_string
+        assert 'project_id={}'.format(project_id) in query_string
+        assert 'asset_category={}'.format(asset_category) in query_string
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['pipeline_flows'] == pipeline_json_model
+
+
+    @responses.activate
+    def test_create_datastage_subflows_required_params(self):
+        """
+        test_create_datastage_subflows_required_params()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.POST,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Construct a dict representation of a Pipelines model
+        pipelines_model = {}
+        pipelines_model['app_data'] = { 'foo': 'bar' }
+        pipelines_model['description'] = 'A test DataStage flow.'
+        pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
+        pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
+        pipelines_model['runtime_ref'] = 'pxOsh'
+
+        # Construct a dict representation of a PipelineJson model
+        pipeline_json_model = {}
+        pipeline_json_model['app_data'] = { 'foo': 'bar' }
+        pipeline_json_model['doc_type'] = 'pipeline'
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
+        pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
+        pipeline_json_model['parameters'] = { 'foo': 'bar' }
+        pipeline_json_model['pipelines'] = [pipelines_model]
+        pipeline_json_model['primary_pipeline'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipeline_json_model['runtimes'] = [{'id':'pxOsh', 'name':'pxOsh'}]
+        pipeline_json_model['schemas'] = [{'fields':[{'app_data':{'is_unicode_string':False, 'odbc_type':'INTEGER', 'type_code':'INT32'}, 'metadata':{'decimal_precision':6, 'decimal_scale':0, 'is_key':False, 'is_signed':False, 'item_index':0, 'max_length':6, 'min_length':0}, 'name':'ID', 'nullable':False, 'type':'integer'}], 'id':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}]
+        pipeline_json_model['version'] = '3.0'
+
+        # Set up parameter values
+        data_intg_subflow_name = 'testString'
+        pipeline_flows = pipeline_json_model
+
+        # Invoke method
+        response = _service.create_datastage_subflows(
+            data_intg_subflow_name,
+            pipeline_flows=pipeline_flows,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'data_intg_subflow_name={}'.format(data_intg_subflow_name) in query_string
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['pipeline_flows'] == pipeline_json_model
+
+
+    @responses.activate
+    def test_create_datastage_subflows_value_error(self):
+        """
+        test_create_datastage_subflows_value_error()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.POST,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Construct a dict representation of a Pipelines model
+        pipelines_model = {}
+        pipelines_model['app_data'] = { 'foo': 'bar' }
+        pipelines_model['description'] = 'A test DataStage flow.'
+        pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
+        pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
+        pipelines_model['runtime_ref'] = 'pxOsh'
+
+        # Construct a dict representation of a PipelineJson model
+        pipeline_json_model = {}
+        pipeline_json_model['app_data'] = { 'foo': 'bar' }
+        pipeline_json_model['doc_type'] = 'pipeline'
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
+        pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
+        pipeline_json_model['parameters'] = { 'foo': 'bar' }
+        pipeline_json_model['pipelines'] = [pipelines_model]
+        pipeline_json_model['primary_pipeline'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipeline_json_model['runtimes'] = [{'id':'pxOsh', 'name':'pxOsh'}]
+        pipeline_json_model['schemas'] = [{'fields':[{'app_data':{'is_unicode_string':False, 'odbc_type':'INTEGER', 'type_code':'INT32'}, 'metadata':{'decimal_precision':6, 'decimal_scale':0, 'is_key':False, 'is_signed':False, 'item_index':0, 'max_length':6, 'min_length':0}, 'name':'ID', 'nullable':False, 'type':'integer'}], 'id':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}]
+        pipeline_json_model['version'] = '3.0'
+
+        # Set up parameter values
+        data_intg_subflow_name = 'testString'
+        pipeline_flows = pipeline_json_model
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "data_intg_subflow_name": data_intg_subflow_name,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.create_datastage_subflows(**req_copy)
+
+
+
+class TestGetDatastageSubflows():
+    """
+    Test Class for get_datastage_subflows
+    """
+
+    def preprocess_url(self, request_url: str):
+        """
+        Preprocess the request URL to ensure the mock response will be found.
+        """
+        if re.fullmatch('.*/+', request_url) is None:
+            return request_url
+        else:
+            return re.compile(request_url.rstrip('/') + '/+')
+
+    @responses.activate
+    def test_get_datastage_subflows_all_params(self):
+        """
+        get_datastage_subflows()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString')
+        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow.", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "name": "ContainerC1", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=200)
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+        catalog_id = 'testString'
+        project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
+
+        # Invoke method
+        response = _service.get_datastage_subflows(
+            data_intg_subflow_id,
+            catalog_id=catalog_id,
+            project_id=project_id,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'catalog_id={}'.format(catalog_id) in query_string
+        assert 'project_id={}'.format(project_id) in query_string
+
+
+    @responses.activate
+    def test_get_datastage_subflows_required_params(self):
+        """
+        test_get_datastage_subflows_required_params()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString')
+        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow.", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "name": "ContainerC1", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=200)
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+
+        # Invoke method
+        response = _service.get_datastage_subflows(
+            data_intg_subflow_id,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+
+
+    @responses.activate
+    def test_get_datastage_subflows_value_error(self):
+        """
+        test_get_datastage_subflows_value_error()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString')
+        mock_response = '{"attachments": {"app_data": {"anyKey": "anyValue"}, "doc_type": "pipeline", "external_paramsets": [{"anyKey": "anyValue"}], "id": "84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff", "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json", "parameters": {"anyKey": "anyValue"}, "pipelines": [{"app_data": {"anyKey": "anyValue"}, "description": "A test DataStage flow.", "id": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "name": "ContainerC1", "nodes": [{"anyKey": "anyValue"}], "runtime_ref": "pxOsh"}], "primary_pipeline": "fa1b859a-d592-474d-b56c-2137e4efa4bc", "runtimes": [{"anyKey": "anyValue"}], "schemas": [{"anyKey": "anyValue"}], "version": "3.0"}, "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=200)
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "data_intg_subflow_id": data_intg_subflow_id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.get_datastage_subflows(**req_copy)
+
+
+
+class TestUpdateDatastageSubflows():
+    """
+    Test Class for update_datastage_subflows
+    """
+
+    def preprocess_url(self, request_url: str):
+        """
+        Preprocess the request URL to ensure the mock response will be found.
+        """
+        if re.fullmatch('.*/+', request_url) is None:
+            return request_url
+        else:
+            return re.compile(request_url.rstrip('/') + '/+')
+
+    @responses.activate
+    def test_update_datastage_subflows_all_params(self):
+        """
+        update_datastage_subflows()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.PUT,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Construct a dict representation of a Pipelines model
+        pipelines_model = {}
+        pipelines_model['app_data'] = { 'foo': 'bar' }
+        pipelines_model['description'] = 'A test DataStage flow.'
+        pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
+        pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
+        pipelines_model['runtime_ref'] = 'pxOsh'
+
+        # Construct a dict representation of a PipelineJson model
+        pipeline_json_model = {}
+        pipeline_json_model['app_data'] = { 'foo': 'bar' }
+        pipeline_json_model['doc_type'] = 'pipeline'
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
+        pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
+        pipeline_json_model['parameters'] = { 'foo': 'bar' }
+        pipeline_json_model['pipelines'] = [pipelines_model]
+        pipeline_json_model['primary_pipeline'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipeline_json_model['runtimes'] = [{'id':'pxOsh', 'name':'pxOsh'}]
+        pipeline_json_model['schemas'] = [{'fields':[{'app_data':{'is_unicode_string':False, 'odbc_type':'INTEGER', 'type_code':'INT32'}, 'metadata':{'decimal_precision':6, 'decimal_scale':0, 'is_key':False, 'is_signed':False, 'item_index':0, 'max_length':6, 'min_length':0}, 'name':'ID', 'nullable':False, 'type':'integer'}], 'id':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}]
+        pipeline_json_model['version'] = '3.0'
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+        data_intg_subflow_name = 'testString'
+        pipeline_flows = pipeline_json_model
+        catalog_id = 'testString'
+        project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
+
+        # Invoke method
+        response = _service.update_datastage_subflows(
+            data_intg_subflow_id,
+            data_intg_subflow_name,
+            pipeline_flows=pipeline_flows,
+            catalog_id=catalog_id,
+            project_id=project_id,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'data_intg_subflow_name={}'.format(data_intg_subflow_name) in query_string
+        assert 'catalog_id={}'.format(catalog_id) in query_string
+        assert 'project_id={}'.format(project_id) in query_string
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['pipeline_flows'] == pipeline_json_model
+
+
+    @responses.activate
+    def test_update_datastage_subflows_required_params(self):
+        """
+        test_update_datastage_subflows_required_params()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.PUT,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Construct a dict representation of a Pipelines model
+        pipelines_model = {}
+        pipelines_model['app_data'] = { 'foo': 'bar' }
+        pipelines_model['description'] = 'A test DataStage flow.'
+        pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
+        pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
+        pipelines_model['runtime_ref'] = 'pxOsh'
+
+        # Construct a dict representation of a PipelineJson model
+        pipeline_json_model = {}
+        pipeline_json_model['app_data'] = { 'foo': 'bar' }
+        pipeline_json_model['doc_type'] = 'pipeline'
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
+        pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
+        pipeline_json_model['parameters'] = { 'foo': 'bar' }
+        pipeline_json_model['pipelines'] = [pipelines_model]
+        pipeline_json_model['primary_pipeline'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipeline_json_model['runtimes'] = [{'id':'pxOsh', 'name':'pxOsh'}]
+        pipeline_json_model['schemas'] = [{'fields':[{'app_data':{'is_unicode_string':False, 'odbc_type':'INTEGER', 'type_code':'INT32'}, 'metadata':{'decimal_precision':6, 'decimal_scale':0, 'is_key':False, 'is_signed':False, 'item_index':0, 'max_length':6, 'min_length':0}, 'name':'ID', 'nullable':False, 'type':'integer'}], 'id':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}]
+        pipeline_json_model['version'] = '3.0'
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+        data_intg_subflow_name = 'testString'
+        pipeline_flows = pipeline_json_model
+
+        # Invoke method
+        response = _service.update_datastage_subflows(
+            data_intg_subflow_id,
+            data_intg_subflow_name,
+            pipeline_flows=pipeline_flows,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'data_intg_subflow_name={}'.format(data_intg_subflow_name) in query_string
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['pipeline_flows'] == pipeline_json_model
+
+
+    @responses.activate
+    def test_update_datastage_subflows_value_error(self):
+        """
+        test_update_datastage_subflows_value_error()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.PUT,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Construct a dict representation of a Pipelines model
+        pipelines_model = {}
+        pipelines_model['app_data'] = { 'foo': 'bar' }
+        pipelines_model['description'] = 'A test DataStage flow.'
+        pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
+        pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
+        pipelines_model['runtime_ref'] = 'pxOsh'
+
+        # Construct a dict representation of a PipelineJson model
+        pipeline_json_model = {}
+        pipeline_json_model['app_data'] = { 'foo': 'bar' }
+        pipeline_json_model['doc_type'] = 'pipeline'
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
+        pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
+        pipeline_json_model['parameters'] = { 'foo': 'bar' }
+        pipeline_json_model['pipelines'] = [pipelines_model]
+        pipeline_json_model['primary_pipeline'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipeline_json_model['runtimes'] = [{'id':'pxOsh', 'name':'pxOsh'}]
+        pipeline_json_model['schemas'] = [{'fields':[{'app_data':{'is_unicode_string':False, 'odbc_type':'INTEGER', 'type_code':'INT32'}, 'metadata':{'decimal_precision':6, 'decimal_scale':0, 'is_key':False, 'is_signed':False, 'item_index':0, 'max_length':6, 'min_length':0}, 'name':'ID', 'nullable':False, 'type':'integer'}], 'id':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}]
+        pipeline_json_model['version'] = '3.0'
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+        data_intg_subflow_name = 'testString'
+        pipeline_flows = pipeline_json_model
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "data_intg_subflow_id": data_intg_subflow_id,
+            "data_intg_subflow_name": data_intg_subflow_name,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.update_datastage_subflows(**req_copy)
+
+
+
+class TestCloneDatastageSubflows():
+    """
+    Test Class for clone_datastage_subflows
+    """
+
+    def preprocess_url(self, request_url: str):
+        """
+        Preprocess the request URL to ensure the mock response will be found.
+        """
+        if re.fullmatch('.*/+', request_url) is None:
+            return request_url
+        else:
+            return re.compile(request_url.rstrip('/') + '/+')
+
+    @responses.activate
+    def test_clone_datastage_subflows_all_params(self):
+        """
+        clone_datastage_subflows()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString/clone')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.POST,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+        catalog_id = 'testString'
+        project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
+
+        # Invoke method
+        response = _service.clone_datastage_subflows(
+            data_intg_subflow_id,
+            catalog_id=catalog_id,
+            project_id=project_id,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?',1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'catalog_id={}'.format(catalog_id) in query_string
+        assert 'project_id={}'.format(project_id) in query_string
+
+
+    @responses.activate
+    def test_clone_datastage_subflows_required_params(self):
+        """
+        test_clone_datastage_subflows_required_params()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString/clone')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.POST,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+
+        # Invoke method
+        response = _service.clone_datastage_subflows(
+            data_intg_subflow_id,
+            headers={}
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+
+
+    @responses.activate
+    def test_clone_datastage_subflows_value_error(self):
+        """
+        test_clone_datastage_subflows_value_error()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/data_intg_flows/subflows/testString/clone')
+        mock_response = '{"attachments": [{"anyKey": "anyValue"}], "entity": {"data_intg_flow": {"anyKey": "anyValue"}, "data_intg_subflow": {"anyKey": "anyValue"}, "description": "description", "lock": {"entity": {"data_intg_flow_id": "data_intg_flow_id", "requester": "requester"}, "metadata": {"alive": false}}, "name": "name", "rov": {"members": ["members"], "mode": 4}, "sub_type": "sub_type"}, "metadata": {"asset_id": "asset_id", "asset_type": "asset_type", "catalog_id": "catalog_id", "create_time": "2019-01-01T12:00:00.000Z", "creator_id": "creator_id", "description": "description", "href": "href", "name": "name", "origin_country": "origin_country", "project_id": "project_id", "resource_key": "resource_key", "size": 4, "source_system": {"mapKey": {"anyKey": "anyValue"}}, "tags": ["tags"], "usage": {"access_count": 12, "last_access_time": "2019-01-01T12:00:00.000Z", "last_accessor_id": "last_accessor_id", "last_modification_time": "2019-01-01T12:00:00.000Z", "last_modifier_id": "last_modifier_id"}}}'
+        responses.add(responses.POST,
+                      url,
+                      body=mock_response,
+                      content_type='application/json;charset=utf-8',
+                      status=201)
+
+        # Set up parameter values
+        data_intg_subflow_id = 'testString'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "data_intg_subflow_id": data_intg_subflow_id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.clone_datastage_subflows(**req_copy)
+
+
+
+# endregion
+##############################################################################
+# End of Service: DataStageSubflows
+##############################################################################
+
+##############################################################################
+# Start of Service: Migration
+##############################################################################
+# region
+
+class TestCreateMigration():
+    """
+    Test Class for create_migration
+    """
+
+    def preprocess_url(self, request_url: str):
+        """
+        Preprocess the request URL to ensure the mock response will be found.
+        """
+        if re.fullmatch('.*/+', request_url) is None:
+            return request_url
+        else:
+            return re.compile(request_url.rstrip('/') + '/+')
+
+    @responses.activate
+    def test_create_migration_all_params(self):
+        """
+        create_migration()
+        """
+        # Set up mock
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports')
+        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "stage_type": "stage_type", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "notifications": [{"created_at": "2019-01-01T12:00:00.000Z", "id": "id", "status": "status"}], "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "subflows_total": 14, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -995,7 +1809,7 @@ class TestMigrationCreate():
         file_name = 'myFlows.isx'
 
         # Invoke method
-        response = service.migration_create(
+        response = _service.create_migration(
             body,
             catalog_id=catalog_id,
             project_id=project_id,
@@ -1023,13 +1837,13 @@ class TestMigrationCreate():
 
 
     @responses.activate
-    def test_migration_create_required_params(self):
+    def test_create_migration_required_params(self):
         """
-        test_migration_create_required_params()
+        test_create_migration_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports')
-        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "px_containers_total": 19, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports')
+        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "stage_type": "stage_type", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "notifications": [{"created_at": "2019-01-01T12:00:00.000Z", "id": "id", "status": "status"}], "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "subflows_total": 14, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1040,7 +1854,7 @@ class TestMigrationCreate():
         body = io.BytesIO(b'This is a mock file.').getvalue()
 
         # Invoke method
-        response = service.migration_create(
+        response = _service.create_migration(
             body,
             headers={}
         )
@@ -1053,13 +1867,13 @@ class TestMigrationCreate():
 
 
     @responses.activate
-    def test_migration_create_value_error(self):
+    def test_create_migration_value_error(self):
         """
-        test_migration_create_value_error()
+        test_create_migration_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports')
-        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "px_containers_total": 19, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports')
+        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "stage_type": "stage_type", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "notifications": [{"created_at": "2019-01-01T12:00:00.000Z", "id": "id", "status": "status"}], "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "subflows_total": 14, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1076,13 +1890,13 @@ class TestMigrationCreate():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.migration_create(**req_copy)
+                _service.create_migration(**req_copy)
 
 
 
-class TestMigrationDelete():
+class TestDeleteMigration():
     """
-    Test Class for migration_delete
+    Test Class for delete_migration
     """
 
     def preprocess_url(self, request_url: str):
@@ -1095,12 +1909,12 @@ class TestMigrationDelete():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_migration_delete_all_params(self):
+    def test_delete_migration_all_params(self):
         """
-        migration_delete()
+        delete_migration()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports/cc6dbbfd-810d-4f0e-b0a9-228c328aff29')
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports/cc6dbbfd-810d-4f0e-b0a9-228c328aff29')
         responses.add(responses.DELETE,
                       url,
                       status=204)
@@ -1111,7 +1925,7 @@ class TestMigrationDelete():
         project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
 
         # Invoke method
-        response = service.migration_delete(
+        response = _service.delete_migration(
             import_id,
             catalog_id=catalog_id,
             project_id=project_id,
@@ -1129,12 +1943,12 @@ class TestMigrationDelete():
 
 
     @responses.activate
-    def test_migration_delete_required_params(self):
+    def test_delete_migration_required_params(self):
         """
-        test_migration_delete_required_params()
+        test_delete_migration_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports/cc6dbbfd-810d-4f0e-b0a9-228c328aff29')
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports/cc6dbbfd-810d-4f0e-b0a9-228c328aff29')
         responses.add(responses.DELETE,
                       url,
                       status=204)
@@ -1143,7 +1957,7 @@ class TestMigrationDelete():
         import_id = 'cc6dbbfd-810d-4f0e-b0a9-228c328aff29'
 
         # Invoke method
-        response = service.migration_delete(
+        response = _service.delete_migration(
             import_id,
             headers={}
         )
@@ -1154,12 +1968,12 @@ class TestMigrationDelete():
 
 
     @responses.activate
-    def test_migration_delete_value_error(self):
+    def test_delete_migration_value_error(self):
         """
-        test_migration_delete_value_error()
+        test_delete_migration_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports/cc6dbbfd-810d-4f0e-b0a9-228c328aff29')
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports/cc6dbbfd-810d-4f0e-b0a9-228c328aff29')
         responses.add(responses.DELETE,
                       url,
                       status=204)
@@ -1174,13 +1988,13 @@ class TestMigrationDelete():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.migration_delete(**req_copy)
+                _service.delete_migration(**req_copy)
 
 
 
-class TestMigrationGet():
+class TestGetMigration():
     """
-    Test Class for migration_get
+    Test Class for get_migration
     """
 
     def preprocess_url(self, request_url: str):
@@ -1193,13 +2007,13 @@ class TestMigrationGet():
             return re.compile(request_url.rstrip('/') + '/+')
 
     @responses.activate
-    def test_migration_get_all_params(self):
+    def test_get_migration_all_params(self):
         """
-        migration_get()
+        get_migration()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports/testString')
-        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "px_containers_total": 19, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports/testString')
+        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "stage_type": "stage_type", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "notifications": [{"created_at": "2019-01-01T12:00:00.000Z", "id": "id", "status": "status"}], "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "subflows_total": 14, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1212,7 +2026,7 @@ class TestMigrationGet():
         project_id = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23'
 
         # Invoke method
-        response = service.migration_get(
+        response = _service.get_migration(
             import_id,
             catalog_id=catalog_id,
             project_id=project_id,
@@ -1230,13 +2044,13 @@ class TestMigrationGet():
 
 
     @responses.activate
-    def test_migration_get_required_params(self):
+    def test_get_migration_required_params(self):
         """
-        test_migration_get_required_params()
+        test_get_migration_required_params()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports/testString')
-        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "px_containers_total": 19, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports/testString')
+        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "stage_type": "stage_type", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "notifications": [{"created_at": "2019-01-01T12:00:00.000Z", "id": "id", "status": "status"}], "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "subflows_total": 14, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1247,7 +2061,7 @@ class TestMigrationGet():
         import_id = 'testString'
 
         # Invoke method
-        response = service.migration_get(
+        response = _service.get_migration(
             import_id,
             headers={}
         )
@@ -1258,13 +2072,13 @@ class TestMigrationGet():
 
 
     @responses.activate
-    def test_migration_get_value_error(self):
+    def test_get_migration_value_error(self):
         """
-        test_migration_get_value_error()
+        test_get_migration_value_error()
         """
         # Set up mock
-        url = self.preprocess_url(base_url + '/v3/migration/isx_imports/testString')
-        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "px_containers_total": 19, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
+        url = self.preprocess_url(_base_url + '/v3/migration/isx_imports/testString')
+        mock_response = '{"entity": {"cancelled_by": "user1@company1.com", "conflict_resolution": "conflict_resolution", "end_time": "2019-01-01T12:00:00.000Z", "import_data_flows": [{"conflict_resolution_status": "import_flow_renamed", "end_time": "2019-01-01T12:00:00.000Z", "errors": [{"description": "description", "name": "name", "stage_type": "stage_type", "type": "unsupported_stage_type"}], "id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "job_id": "ccfaaafd-810d-4f0e-b0a9-228c328a0136", "job_name": "Aggregator12_DataStage_1", "job_type": "px_job", "name": "cancel-reservation-job", "original_name": "cancel-reservation-job", "ref_asset_id": "ccfdbbfd-810d-4f0e-b0a9-228c328a0136", "status": "completed", "type": "px_job", "warnings": [{"description": "description", "name": "name", "type": "unreleased_stage_type"}]}], "name": "seat-reservation-jobs", "notifications": [{"created_at": "2019-01-01T12:00:00.000Z", "id": "id", "status": "status"}], "on_failure": "on_failure", "remaining_time": 14, "start_time": "2019-01-01T12:00:00.000Z", "status": "in_progress", "tally": {"connections_total": 17, "deprecated": 10, "failed": 6, "imported": 8, "parameter_sets_total": 20, "pending": 7, "renamed": 7, "replaced": 8, "sequence_jobs_total": 19, "skipped": 7, "subflows_total": 14, "table_definitions_total": 23, "total": 5, "unsupported": 11}}, "metadata": {"catalog_id": "catalog_id", "created_at": "2019-01-01T12:00:00.000Z", "created_by": "user1@company1.com", "id": "id", "modified_at": "2019-01-01T12:00:00.000Z", "name": "name", "project_id": "project_id", "project_name": "project_name", "url": "url"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1281,7 +2095,7 @@ class TestMigrationGet():
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
-                service.migration_get(**req_copy)
+                _service.get_migration(**req_copy)
 
 
 
@@ -1295,7 +2109,7 @@ class TestMigrationGet():
 # Start of Model Tests
 ##############################################################################
 # region
-class TestAssetEntityROV():
+class AssetEntityROVUnitTests():
     """
     Test Class for AssetEntityROV
     """
@@ -1325,7 +2139,7 @@ class TestAssetEntityROV():
         asset_entity_rov_model_json2 = asset_entity_rov_model.to_dict()
         assert asset_entity_rov_model_json2 == asset_entity_rov_model_json
 
-class TestAssetSystemMetadata():
+class AssetSystemMetadataUnitTests():
     """
     Test Class for AssetSystemMetadata
     """
@@ -1339,9 +2153,9 @@ class TestAssetSystemMetadata():
 
         asset_system_metadata_usage_model = {} # AssetSystemMetadataUsage
         asset_system_metadata_usage_model['access_count'] = 38
-        asset_system_metadata_usage_model['last_access_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_access_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_accessor_id'] = 'testString'
-        asset_system_metadata_usage_model['last_modification_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_modification_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_modifier_id'] = 'testString'
 
         # Construct a json representation of a AssetSystemMetadata model
@@ -1349,7 +2163,7 @@ class TestAssetSystemMetadata():
         asset_system_metadata_model_json['asset_id'] = 'testString'
         asset_system_metadata_model_json['asset_type'] = 'testString'
         asset_system_metadata_model_json['catalog_id'] = 'testString'
-        asset_system_metadata_model_json['create_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_model_json['create_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_model_json['creator_id'] = 'testString'
         asset_system_metadata_model_json['description'] = 'testString'
         asset_system_metadata_model_json['href'] = 'testString'
@@ -1377,7 +2191,7 @@ class TestAssetSystemMetadata():
         asset_system_metadata_model_json2 = asset_system_metadata_model.to_dict()
         assert asset_system_metadata_model_json2 == asset_system_metadata_model_json
 
-class TestAssetSystemMetadataUsage():
+class AssetSystemMetadataUsageUnitTests():
     """
     Test Class for AssetSystemMetadataUsage
     """
@@ -1390,9 +2204,9 @@ class TestAssetSystemMetadataUsage():
         # Construct a json representation of a AssetSystemMetadataUsage model
         asset_system_metadata_usage_model_json = {}
         asset_system_metadata_usage_model_json['access_count'] = 38
-        asset_system_metadata_usage_model_json['last_access_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model_json['last_access_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model_json['last_accessor_id'] = 'testString'
-        asset_system_metadata_usage_model_json['last_modification_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model_json['last_modification_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model_json['last_modifier_id'] = 'testString'
 
         # Construct a model instance of AssetSystemMetadataUsage by calling from_dict on the json representation
@@ -1410,7 +2224,7 @@ class TestAssetSystemMetadataUsage():
         asset_system_metadata_usage_model_json2 = asset_system_metadata_usage_model.to_dict()
         assert asset_system_metadata_usage_model_json2 == asset_system_metadata_usage_model_json
 
-class TestDataFlowPagedCollection():
+class DataFlowPagedCollectionUnitTests():
     """
     Test Class for DataFlowPagedCollection
     """
@@ -1439,6 +2253,7 @@ class TestDataFlowPagedCollection():
 
         data_intg_flow_entity_model = {} # DataIntgFlowEntity
         data_intg_flow_entity_model['data_intg_flow'] = { 'foo': 'bar' }
+        data_intg_flow_entity_model['data_intg_subflow'] = { 'foo': 'bar' }
         data_intg_flow_entity_model['description'] = 'testString'
         data_intg_flow_entity_model['lock'] = data_intg_flow_lock_model
         data_intg_flow_entity_model['name'] = 'testString'
@@ -1447,16 +2262,16 @@ class TestDataFlowPagedCollection():
 
         asset_system_metadata_usage_model = {} # AssetSystemMetadataUsage
         asset_system_metadata_usage_model['access_count'] = 38
-        asset_system_metadata_usage_model['last_access_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_access_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_accessor_id'] = 'testString'
-        asset_system_metadata_usage_model['last_modification_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_modification_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_modifier_id'] = 'testString'
 
         asset_system_metadata_model = {} # AssetSystemMetadata
         asset_system_metadata_model['asset_id'] = 'testString'
         asset_system_metadata_model['asset_type'] = 'testString'
         asset_system_metadata_model['catalog_id'] = 'testString'
-        asset_system_metadata_model['create_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_model['create_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_model['creator_id'] = 'testString'
         asset_system_metadata_model['description'] = 'testString'
         asset_system_metadata_model['href'] = 'testString'
@@ -1502,7 +2317,7 @@ class TestDataFlowPagedCollection():
         data_flow_paged_collection_model_json2 = data_flow_paged_collection_model.to_dict()
         assert data_flow_paged_collection_model_json2 == data_flow_paged_collection_model_json
 
-class TestDataImportError():
+class DataImportErrorUnitTests():
     """
     Test Class for DataImportError
     """
@@ -1516,6 +2331,7 @@ class TestDataImportError():
         data_import_error_model_json = {}
         data_import_error_model_json['description'] = 'testString'
         data_import_error_model_json['name'] = 'testString'
+        data_import_error_model_json['stage_type'] = 'testString'
         data_import_error_model_json['type'] = 'unsupported_stage_type'
 
         # Construct a model instance of DataImportError by calling from_dict on the json representation
@@ -1533,7 +2349,7 @@ class TestDataImportError():
         data_import_error_model_json2 = data_import_error_model.to_dict()
         assert data_import_error_model_json2 == data_import_error_model_json
 
-class TestDataIntgFlow():
+class DataIntgFlowUnitTests():
     """
     Test Class for DataIntgFlow
     """
@@ -1562,6 +2378,7 @@ class TestDataIntgFlow():
 
         data_intg_flow_entity_model = {} # DataIntgFlowEntity
         data_intg_flow_entity_model['data_intg_flow'] = { 'foo': 'bar' }
+        data_intg_flow_entity_model['data_intg_subflow'] = { 'foo': 'bar' }
         data_intg_flow_entity_model['description'] = 'testString'
         data_intg_flow_entity_model['lock'] = data_intg_flow_lock_model
         data_intg_flow_entity_model['name'] = 'testString'
@@ -1570,16 +2387,16 @@ class TestDataIntgFlow():
 
         asset_system_metadata_usage_model = {} # AssetSystemMetadataUsage
         asset_system_metadata_usage_model['access_count'] = 38
-        asset_system_metadata_usage_model['last_access_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_access_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_accessor_id'] = 'testString'
-        asset_system_metadata_usage_model['last_modification_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_modification_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_modifier_id'] = 'testString'
 
         asset_system_metadata_model = {} # AssetSystemMetadata
         asset_system_metadata_model['asset_id'] = 'testString'
         asset_system_metadata_model['asset_type'] = 'testString'
         asset_system_metadata_model['catalog_id'] = 'testString'
-        asset_system_metadata_model['create_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_model['create_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_model['creator_id'] = 'testString'
         asset_system_metadata_model['description'] = 'testString'
         asset_system_metadata_model['href'] = 'testString'
@@ -1613,7 +2430,7 @@ class TestDataIntgFlow():
         data_intg_flow_model_json2 = data_intg_flow_model.to_dict()
         assert data_intg_flow_model_json2 == data_intg_flow_model_json
 
-class TestDataIntgFlowEntity():
+class DataIntgFlowEntityUnitTests():
     """
     Test Class for DataIntgFlowEntity
     """
@@ -1643,6 +2460,7 @@ class TestDataIntgFlowEntity():
         # Construct a json representation of a DataIntgFlowEntity model
         data_intg_flow_entity_model_json = {}
         data_intg_flow_entity_model_json['data_intg_flow'] = { 'foo': 'bar' }
+        data_intg_flow_entity_model_json['data_intg_subflow'] = { 'foo': 'bar' }
         data_intg_flow_entity_model_json['description'] = 'testString'
         data_intg_flow_entity_model_json['lock'] = data_intg_flow_lock_model
         data_intg_flow_entity_model_json['name'] = 'testString'
@@ -1664,7 +2482,7 @@ class TestDataIntgFlowEntity():
         data_intg_flow_entity_model_json2 = data_intg_flow_entity_model.to_dict()
         assert data_intg_flow_entity_model_json2 == data_intg_flow_entity_model_json
 
-class TestDataIntgFlowJson():
+class DataIntgFlowJsonUnitTests():
     """
     Test Class for DataIntgFlowJson
     """
@@ -1678,15 +2496,16 @@ class TestDataIntgFlowJson():
 
         pipelines_model = {} # Pipelines
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
         pipeline_json_model = {} # PipelineJson
         pipeline_json_model['app_data'] = { 'foo': 'bar' }
         pipeline_json_model['doc_type'] = 'pipeline'
-        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model['parameters'] = { 'foo': 'bar' }
@@ -1713,6 +2532,7 @@ class TestDataIntgFlowJson():
 
         data_intg_flow_entity_model = {} # DataIntgFlowEntity
         data_intg_flow_entity_model['data_intg_flow'] = { 'foo': 'bar' }
+        data_intg_flow_entity_model['data_intg_subflow'] = { 'foo': 'bar' }
         data_intg_flow_entity_model['description'] = 'testString'
         data_intg_flow_entity_model['lock'] = data_intg_flow_lock_model
         data_intg_flow_entity_model['name'] = 'testString'
@@ -1721,16 +2541,16 @@ class TestDataIntgFlowJson():
 
         asset_system_metadata_usage_model = {} # AssetSystemMetadataUsage
         asset_system_metadata_usage_model['access_count'] = 38
-        asset_system_metadata_usage_model['last_access_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_access_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_accessor_id'] = 'testString'
-        asset_system_metadata_usage_model['last_modification_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_usage_model['last_modification_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_usage_model['last_modifier_id'] = 'testString'
 
         asset_system_metadata_model = {} # AssetSystemMetadata
         asset_system_metadata_model['asset_id'] = 'testString'
         asset_system_metadata_model['asset_type'] = 'testString'
         asset_system_metadata_model['catalog_id'] = 'testString'
-        asset_system_metadata_model['create_time'] = '2020-01-28T18:40:40.123456Z'
+        asset_system_metadata_model['create_time'] = "2019-01-01T12:00:00Z"
         asset_system_metadata_model['creator_id'] = 'testString'
         asset_system_metadata_model['description'] = 'testString'
         asset_system_metadata_model['href'] = 'testString'
@@ -1764,7 +2584,7 @@ class TestDataIntgFlowJson():
         data_intg_flow_json_model_json2 = data_intg_flow_json_model.to_dict()
         assert data_intg_flow_json_model_json2 == data_intg_flow_json_model_json
 
-class TestDataIntgFlowLock():
+class DataIntgFlowLockUnitTests():
     """
     Test Class for DataIntgFlowLock
     """
@@ -1803,7 +2623,7 @@ class TestDataIntgFlowLock():
         data_intg_flow_lock_model_json2 = data_intg_flow_lock_model.to_dict()
         assert data_intg_flow_lock_model_json2 == data_intg_flow_lock_model_json
 
-class TestDataIntgFlowLockEntity():
+class DataIntgFlowLockEntityUnitTests():
     """
     Test Class for DataIntgFlowLockEntity
     """
@@ -1833,7 +2653,7 @@ class TestDataIntgFlowLockEntity():
         data_intg_flow_lock_entity_model_json2 = data_intg_flow_lock_entity_model.to_dict()
         assert data_intg_flow_lock_entity_model_json2 == data_intg_flow_lock_entity_model_json
 
-class TestDataIntgFlowLockMetadata():
+class DataIntgFlowLockMetadataUnitTests():
     """
     Test Class for DataIntgFlowLockMetadata
     """
@@ -1862,7 +2682,7 @@ class TestDataIntgFlowLockMetadata():
         data_intg_flow_lock_metadata_model_json2 = data_intg_flow_lock_metadata_model.to_dict()
         assert data_intg_flow_lock_metadata_model_json2 == data_intg_flow_lock_metadata_model_json
 
-class TestFlowCompileResponse():
+class FlowCompileResponseUnitTests():
     """
     Test Class for FlowCompileResponse
     """
@@ -1892,7 +2712,7 @@ class TestFlowCompileResponse():
         flow_compile_response_model_json2 = flow_compile_response_model.to_dict()
         assert flow_compile_response_model_json2 == flow_compile_response_model_json
 
-class TestHrefModel():
+class HrefModelUnitTests():
     """
     Test Class for HrefModel
     """
@@ -1921,7 +2741,7 @@ class TestHrefModel():
         href_model_model_json2 = href_model_model.to_dict()
         assert href_model_model_json2 == href_model_model_json
 
-class TestImportCount():
+class ImportCountUnitTests():
     """
     Test Class for ImportCount
     """
@@ -1939,11 +2759,11 @@ class TestImportCount():
         import_count_model_json['imported'] = 38
         import_count_model_json['parameter_sets_total'] = 38
         import_count_model_json['pending'] = 38
-        import_count_model_json['px_containers_total'] = 38
         import_count_model_json['renamed'] = 38
         import_count_model_json['replaced'] = 38
         import_count_model_json['sequence_jobs_total'] = 38
         import_count_model_json['skipped'] = 38
+        import_count_model_json['subflows_total'] = 38
         import_count_model_json['table_definitions_total'] = 38
         import_count_model_json['total'] = 38
         import_count_model_json['unsupported'] = 38
@@ -1963,7 +2783,7 @@ class TestImportCount():
         import_count_model_json2 = import_count_model.to_dict()
         assert import_count_model_json2 == import_count_model_json
 
-class TestImportFlow():
+class ImportFlowUnitTests():
     """
     Test Class for ImportFlow
     """
@@ -1978,6 +2798,7 @@ class TestImportFlow():
         data_import_error_model = {} # DataImportError
         data_import_error_model['description'] = 'testString'
         data_import_error_model['name'] = 'testString'
+        data_import_error_model['stage_type'] = 'testString'
         data_import_error_model['type'] = 'unsupported_stage_type'
 
         import_flow_warning_model = {} # ImportFlowWarning
@@ -1988,7 +2809,7 @@ class TestImportFlow():
         # Construct a json representation of a ImportFlow model
         import_flow_model_json = {}
         import_flow_model_json['conflict_resolution_status'] = 'import_flow_renamed'
-        import_flow_model_json['end_time'] = '2020-01-28T18:40:40.123456Z'
+        import_flow_model_json['end_time'] = "2019-01-01T12:00:00Z"
         import_flow_model_json['errors'] = [data_import_error_model]
         import_flow_model_json['id'] = 'ccfdbbfd-810d-4f0e-b0a9-228c328a0136'
         import_flow_model_json['job_id'] = 'ccfaaafd-810d-4f0e-b0a9-228c328a0136'
@@ -2016,7 +2837,7 @@ class TestImportFlow():
         import_flow_model_json2 = import_flow_model.to_dict()
         assert import_flow_model_json2 == import_flow_model_json
 
-class TestImportFlowWarning():
+class ImportFlowWarningUnitTests():
     """
     Test Class for ImportFlowWarning
     """
@@ -2047,7 +2868,38 @@ class TestImportFlowWarning():
         import_flow_warning_model_json2 = import_flow_warning_model.to_dict()
         assert import_flow_warning_model_json2 == import_flow_warning_model_json
 
-class TestImportResponse():
+class ImportNotificationUnitTests():
+    """
+    Test Class for ImportNotification
+    """
+
+    def test_import_notification_serialization(self):
+        """
+        Test serialization/deserialization for ImportNotification
+        """
+
+        # Construct a json representation of a ImportNotification model
+        import_notification_model_json = {}
+        import_notification_model_json['created_at'] = "2019-01-01T12:00:00Z"
+        import_notification_model_json['id'] = 'testString'
+        import_notification_model_json['status'] = 'testString'
+
+        # Construct a model instance of ImportNotification by calling from_dict on the json representation
+        import_notification_model = ImportNotification.from_dict(import_notification_model_json)
+        assert import_notification_model != False
+
+        # Construct a model instance of ImportNotification by calling from_dict on the json representation
+        import_notification_model_dict = ImportNotification.from_dict(import_notification_model_json).__dict__
+        import_notification_model2 = ImportNotification(**import_notification_model_dict)
+
+        # Verify the model instances are equivalent
+        assert import_notification_model == import_notification_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        import_notification_model_json2 = import_notification_model.to_dict()
+        assert import_notification_model_json2 == import_notification_model_json
+
+class ImportResponseUnitTests():
     """
     Test Class for ImportResponse
     """
@@ -2062,6 +2914,7 @@ class TestImportResponse():
         data_import_error_model = {} # DataImportError
         data_import_error_model['description'] = 'testString'
         data_import_error_model['name'] = 'testString'
+        data_import_error_model['stage_type'] = 'testString'
         data_import_error_model['type'] = 'unsupported_stage_type'
 
         import_flow_warning_model = {} # ImportFlowWarning
@@ -2071,7 +2924,7 @@ class TestImportResponse():
 
         import_flow_model = {} # ImportFlow
         import_flow_model['conflict_resolution_status'] = 'import_flow_renamed'
-        import_flow_model['end_time'] = '2020-01-28T18:40:40.123456Z'
+        import_flow_model['end_time'] = "2019-01-01T12:00:00Z"
         import_flow_model['errors'] = [data_import_error_model]
         import_flow_model['id'] = 'ccfdbbfd-810d-4f0e-b0a9-228c328a0136'
         import_flow_model['job_id'] = 'ccfaaafd-810d-4f0e-b0a9-228c328a0136'
@@ -2084,6 +2937,11 @@ class TestImportResponse():
         import_flow_model['type'] = 'px_job'
         import_flow_model['warnings'] = [import_flow_warning_model]
 
+        import_notification_model = {} # ImportNotification
+        import_notification_model['created_at'] = "2019-01-01T12:00:00Z"
+        import_notification_model['id'] = 'testString'
+        import_notification_model['status'] = 'testString'
+
         import_count_model = {} # ImportCount
         import_count_model['connections_total'] = 38
         import_count_model['deprecated'] = 38
@@ -2091,11 +2949,11 @@ class TestImportResponse():
         import_count_model['imported'] = 38
         import_count_model['parameter_sets_total'] = 38
         import_count_model['pending'] = 38
-        import_count_model['px_containers_total'] = 38
         import_count_model['renamed'] = 38
         import_count_model['replaced'] = 38
         import_count_model['sequence_jobs_total'] = 38
         import_count_model['skipped'] = 38
+        import_count_model['subflows_total'] = 38
         import_count_model['table_definitions_total'] = 38
         import_count_model['total'] = 38
         import_count_model['unsupported'] = 38
@@ -2103,21 +2961,22 @@ class TestImportResponse():
         import_response_entity_model = {} # ImportResponseEntity
         import_response_entity_model['cancelled_by'] = 'user1@company1.com'
         import_response_entity_model['conflict_resolution'] = 'testString'
-        import_response_entity_model['end_time'] = '2020-01-28T18:40:40.123456Z'
+        import_response_entity_model['end_time'] = "2019-01-01T12:00:00Z"
         import_response_entity_model['import_data_flows'] = [import_flow_model]
         import_response_entity_model['name'] = 'seat-reservation-jobs'
+        import_response_entity_model['notifications'] = [import_notification_model]
         import_response_entity_model['on_failure'] = 'testString'
         import_response_entity_model['remaining_time'] = 38
-        import_response_entity_model['start_time'] = '2020-01-28T18:40:40.123456Z'
+        import_response_entity_model['start_time'] = "2019-01-01T12:00:00Z"
         import_response_entity_model['status'] = 'in_progress'
         import_response_entity_model['tally'] = import_count_model
 
         import_response_metadata_model = {} # ImportResponseMetadata
         import_response_metadata_model['catalog_id'] = 'testString'
-        import_response_metadata_model['created_at'] = '2020-01-28T18:40:40.123456Z'
+        import_response_metadata_model['created_at'] = "2019-01-01T12:00:00Z"
         import_response_metadata_model['created_by'] = 'user1@company1.com'
         import_response_metadata_model['id'] = 'testString'
-        import_response_metadata_model['modified_at'] = '2020-01-28T18:40:40.123456Z'
+        import_response_metadata_model['modified_at'] = "2019-01-01T12:00:00Z"
         import_response_metadata_model['name'] = 'testString'
         import_response_metadata_model['project_id'] = 'testString'
         import_response_metadata_model['project_name'] = 'testString'
@@ -2143,7 +3002,7 @@ class TestImportResponse():
         import_response_model_json2 = import_response_model.to_dict()
         assert import_response_model_json2 == import_response_model_json
 
-class TestImportResponseEntity():
+class ImportResponseEntityUnitTests():
     """
     Test Class for ImportResponseEntity
     """
@@ -2158,6 +3017,7 @@ class TestImportResponseEntity():
         data_import_error_model = {} # DataImportError
         data_import_error_model['description'] = 'testString'
         data_import_error_model['name'] = 'testString'
+        data_import_error_model['stage_type'] = 'testString'
         data_import_error_model['type'] = 'unsupported_stage_type'
 
         import_flow_warning_model = {} # ImportFlowWarning
@@ -2167,7 +3027,7 @@ class TestImportResponseEntity():
 
         import_flow_model = {} # ImportFlow
         import_flow_model['conflict_resolution_status'] = 'import_flow_renamed'
-        import_flow_model['end_time'] = '2020-01-28T18:40:40.123456Z'
+        import_flow_model['end_time'] = "2019-01-01T12:00:00Z"
         import_flow_model['errors'] = [data_import_error_model]
         import_flow_model['id'] = 'ccfdbbfd-810d-4f0e-b0a9-228c328a0136'
         import_flow_model['job_id'] = 'ccfaaafd-810d-4f0e-b0a9-228c328a0136'
@@ -2180,6 +3040,11 @@ class TestImportResponseEntity():
         import_flow_model['type'] = 'px_job'
         import_flow_model['warnings'] = [import_flow_warning_model]
 
+        import_notification_model = {} # ImportNotification
+        import_notification_model['created_at'] = "2019-01-01T12:00:00Z"
+        import_notification_model['id'] = 'testString'
+        import_notification_model['status'] = 'testString'
+
         import_count_model = {} # ImportCount
         import_count_model['connections_total'] = 38
         import_count_model['deprecated'] = 38
@@ -2187,11 +3052,11 @@ class TestImportResponseEntity():
         import_count_model['imported'] = 38
         import_count_model['parameter_sets_total'] = 38
         import_count_model['pending'] = 38
-        import_count_model['px_containers_total'] = 38
         import_count_model['renamed'] = 38
         import_count_model['replaced'] = 38
         import_count_model['sequence_jobs_total'] = 38
         import_count_model['skipped'] = 38
+        import_count_model['subflows_total'] = 38
         import_count_model['table_definitions_total'] = 38
         import_count_model['total'] = 38
         import_count_model['unsupported'] = 38
@@ -2200,12 +3065,13 @@ class TestImportResponseEntity():
         import_response_entity_model_json = {}
         import_response_entity_model_json['cancelled_by'] = 'user1@company1.com'
         import_response_entity_model_json['conflict_resolution'] = 'testString'
-        import_response_entity_model_json['end_time'] = '2020-01-28T18:40:40.123456Z'
+        import_response_entity_model_json['end_time'] = "2019-01-01T12:00:00Z"
         import_response_entity_model_json['import_data_flows'] = [import_flow_model]
         import_response_entity_model_json['name'] = 'seat-reservation-jobs'
+        import_response_entity_model_json['notifications'] = [import_notification_model]
         import_response_entity_model_json['on_failure'] = 'testString'
         import_response_entity_model_json['remaining_time'] = 38
-        import_response_entity_model_json['start_time'] = '2020-01-28T18:40:40.123456Z'
+        import_response_entity_model_json['start_time'] = "2019-01-01T12:00:00Z"
         import_response_entity_model_json['status'] = 'in_progress'
         import_response_entity_model_json['tally'] = import_count_model
 
@@ -2224,7 +3090,7 @@ class TestImportResponseEntity():
         import_response_entity_model_json2 = import_response_entity_model.to_dict()
         assert import_response_entity_model_json2 == import_response_entity_model_json
 
-class TestImportResponseMetadata():
+class ImportResponseMetadataUnitTests():
     """
     Test Class for ImportResponseMetadata
     """
@@ -2237,10 +3103,10 @@ class TestImportResponseMetadata():
         # Construct a json representation of a ImportResponseMetadata model
         import_response_metadata_model_json = {}
         import_response_metadata_model_json['catalog_id'] = 'testString'
-        import_response_metadata_model_json['created_at'] = '2020-01-28T18:40:40.123456Z'
+        import_response_metadata_model_json['created_at'] = "2019-01-01T12:00:00Z"
         import_response_metadata_model_json['created_by'] = 'user1@company1.com'
         import_response_metadata_model_json['id'] = 'testString'
-        import_response_metadata_model_json['modified_at'] = '2020-01-28T18:40:40.123456Z'
+        import_response_metadata_model_json['modified_at'] = "2019-01-01T12:00:00Z"
         import_response_metadata_model_json['name'] = 'testString'
         import_response_metadata_model_json['project_id'] = 'testString'
         import_response_metadata_model_json['project_name'] = 'testString'
@@ -2261,7 +3127,7 @@ class TestImportResponseMetadata():
         import_response_metadata_model_json2 = import_response_metadata_model.to_dict()
         assert import_response_metadata_model_json2 == import_response_metadata_model_json
 
-class TestPipelineJson():
+class PipelineJsonUnitTests():
     """
     Test Class for PipelineJson
     """
@@ -2275,8 +3141,9 @@ class TestPipelineJson():
 
         pipelines_model = {} # Pipelines
         pipelines_model['app_data'] = { 'foo': 'bar' }
-        pipelines_model['description'] = 'A test DataStage flow'
+        pipelines_model['description'] = 'A test DataStage flow.'
         pipelines_model['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model['name'] = 'ContainerC1'
         pipelines_model['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model['runtime_ref'] = 'pxOsh'
 
@@ -2284,7 +3151,7 @@ class TestPipelineJson():
         pipeline_json_model_json = {}
         pipeline_json_model_json['app_data'] = { 'foo': 'bar' }
         pipeline_json_model_json['doc_type'] = 'pipeline'
-        pipeline_json_model_json['external_paramsets'] = [{'name':'Test Param Set', 'project_id':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
+        pipeline_json_model_json['external_paramsets'] = [{'name':'Test Param Set', 'project_ref':'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23', 'ref':'eeabf991-b69e-4f8c-b9f1-e6f2129b9a57'}]
         pipeline_json_model_json['id'] = '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff'
         pipeline_json_model_json['json_schema'] = 'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json'
         pipeline_json_model_json['parameters'] = { 'foo': 'bar' }
@@ -2309,7 +3176,7 @@ class TestPipelineJson():
         pipeline_json_model_json2 = pipeline_json_model.to_dict()
         assert pipeline_json_model_json2 == pipeline_json_model_json
 
-class TestPipelines():
+class PipelinesUnitTests():
     """
     Test Class for Pipelines
     """
@@ -2322,8 +3189,9 @@ class TestPipelines():
         # Construct a json representation of a Pipelines model
         pipelines_model_json = {}
         pipelines_model_json['app_data'] = { 'foo': 'bar' }
-        pipelines_model_json['description'] = 'A test DataStage flow'
+        pipelines_model_json['description'] = 'A test DataStage flow.'
         pipelines_model_json['id'] = 'fa1b859a-d592-474d-b56c-2137e4efa4bc'
+        pipelines_model_json['name'] = 'ContainerC1'
         pipelines_model_json['nodes'] = [{'app_data':{'ui_data':{'description':'Produce a set of mock data based on the specified metadata', 'image':'/data-intg/flows/graphics/palette/PxRowGenerator.svg', 'label':'Row_Generator_1', 'x_pos':108, 'y_pos':162}}, 'id':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'op':'PxRowGenerator', 'outputs':[{'app_data':{'datastage':{'is_source_of_link':'73a5fb2c-f499-4c75-a8a7-71cea90f5105'}, 'ui_data':{'label':'outPort'}}, 'id':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'parameters':{'records':10}, 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'parameters':{'input_count':0, 'output_count':1}, 'type':'binding'}, {'app_data':{'ui_data':{'description':'Print row column values to either the job log or to a separate output link', 'image':'/data-intg/flows/graphics/palette/PxPeek.svg', 'label':'Peek_1', 'x_pos':342, 'y_pos':162}}, 'id':'4195b012-d3e7-4f74-8099-e7b23ec6ebb9', 'inputs':[{'app_data':{'ui_data':{'label':'inPort'}}, 'id':'c4195b34-8b4a-473f-b987-fa6d028f3968', 'links':[{'app_data':{'ui_data':{'decorations':[{'class_name':'', 'hotspot':False, 'id':'Link_1', 'label':'Link_1', 'outline':True, 'path':'', 'position':'middle'}]}}, 'id':'73a5fb2c-f499-4c75-a8a7-71cea90f5105', 'link_name':'Link_1', 'node_id_ref':'9fc2ec49-87ed-49c7-bdfc-abb06a46af37', 'port_id_ref':'3d01fe66-e675-4e7f-ad7b-3ba9a9cff30d', 'type_attr':'PRIMARY'}], 'schema_ref':'0e04b1b8-60c2-4b36-bae6-d0c7ae03dd8d'}], 'op':'PxPeek', 'outputs':[{'app_data':{'ui_data':{'label':'outPort'}}, 'id':''}], 'parameters':{'all':' ', 'columns':' ', 'dataset':' ', 'input_count':1, 'name':'name', 'nrecs':10, 'output_count':0, 'selection':' '}, 'type':'execution_node'}]
         pipelines_model_json['runtime_ref'] = 'pxOsh'
 
