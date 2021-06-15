@@ -69,16 +69,16 @@ please ask a question
 
 ## Issues
 If you encounter an issue with the project, you are welcome to submit a
-[bug report](https://github.ibm.com/ibmcloud/datastage-python-sdk/issues).
+[bug report](https://github.com/IBM/datastage-python-sdk/issues).
 Before that, please search for similar issues. It's possible that someone has already reported the problem.
 
 ## Open source @ IBM
 Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
 ## Contributing
-See [CONTRIBUTING.md](https://github.ibm.com/ibmcloud/datastage-python-sdk/blob/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://github.com/IBM/datastage-python-sdk/blob/main/CONTRIBUTING.md).
 
 ## License
 
 This SDK is released under the Apache 2.0 license.
-The license's full text can be found in [LICENSE](https://github.ibm.com/ibmcloud/datastage-python-sdk/blob/main/LICENSE).
+The license's full text can be found in [LICENSE](https://github.com/IBM/datastage-python-sdk/blob/main/LICENSE).
