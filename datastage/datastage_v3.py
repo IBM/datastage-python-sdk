@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.28.0-55613c9e-20210220-164656
+# IBM OpenAPI SDK Code Generator Version: 3.33.0-caf29bd0-20210603-225214
  
 """
 The IBM DataStage service provides APIs to manage, edit, and run data flows in supported
@@ -78,7 +78,7 @@ class DatastageV3(BaseService):
     #########################
 
 
-    def datastage_flows_delete(self,
+    def delete_datastage_flows(self,
         id: List[str],
         *,
         catalog_id: str = None,
@@ -89,8 +89,8 @@ class DatastageV3(BaseService):
         """
         Delete DataStage flows.
 
-        Deletes the specified data flows in a project or catalog (either project_id or
-        catalog_id must be set).
+        Deletes the specified data flows in a project or catalog (either `project_id` or
+        `catalog_id` must be set).
         If the deletion of the data flows and their runs will take some time to finish,
         then a 202 response will be returned and the deletion will continue
         asynchronously.
@@ -118,7 +118,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='datastage_flows_delete')
+                                      operation_id='delete_datastage_flows')
         headers.update(sdk_headers)
 
         params = {
@@ -141,7 +141,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def datastage_flows_list(self,
+    def list_datastage_flows(self,
         *,
         catalog_id: str = None,
         project_id: str = None,
@@ -162,21 +162,22 @@ class DatastageV3(BaseService):
          |
         | ------------------------ | ------------ |
         --------------------------------------- |
-        | entity.name              | Equals           | entity.name=MyDataStageFlow  |
-        | entity.name              | Starts with      | entity.name=starts:MyData  |
-        | entity.description       | Equals           | entity.description=movement  |
-        | entity.description       | Starts with      | entity.description=starts:data  |
+        | `entity.name`              | Equals           | `entity.name=MyDataStageFlow`  |
+        | `entity.name`              | Starts with      | `entity.name=starts:MyData`  |
+        | `entity.description`       | Equals           | `entity.description=movement`  |
+        | `entity.description`       | Starts with      | `entity.description=starts:data`
+         |
         To sort the results, use one or more of the parameters  described in the following
         section. If no sort key is specified, the results are sorted in descending order
-        on metadata.create_time (i.e. returning the most  recently created data flows
+        on `metadata.create_time` (i.e. returning the most  recently created data flows
         first).
         | Field                          | Example |
         | ------------------------- | ----------------------------------- |
-        | sort     | sort=+entity.name (sort by ascending name)  |
-        | sort     | sort=-metadata.create_time (sort by descending creation time) |
+        | sort     | `sort=+entity.name` (sort by ascending name)  |
+        | sort     | `sort=-metadata.create_time` (sort by descending creation time) |
         Multiple sort keys can be specified by delimiting them with a comma. For example,
-        to sort in descending order on create_time and then in ascending order on name
-        use: sort=-metadata.create_time,+entity.name.
+        to sort in descending order on `create_time` and then in ascending order on name
+        use: `sort=-metadata.create_time`,`+entity.name`.
 
         :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
                or project_id is required.
@@ -201,7 +202,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='datastage_flows_list')
+                                      operation_id='list_datastage_flows')
         headers.update(sdk_headers)
 
         params = {
@@ -228,7 +229,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def datastage_flows_create(self,
+    def create_datastage_flows(self,
         data_intg_flow_name: str,
         *,
         pipeline_flows: 'PipelineJson' = None,
@@ -240,9 +241,9 @@ class DatastageV3(BaseService):
         """
         Create DataStage flow.
 
-        Creates a DataStage flow in the specified project or catalog (either project_id or
-        catalog_id must be set). All subsequent calls to use the data flow must specify
-        the project or catalog ID the data flow was created in.
+        Creates a DataStage flow in the specified project or catalog (either `project_id`
+        or `catalog_id` must be set). All subsequent calls to use the data flow must
+        specify the project or catalog ID the data flow was created in.
 
         :param str data_intg_flow_name: The data flow name.
         :param PipelineJson pipeline_flows: (optional) Pipeline flow to be stored.
@@ -264,7 +265,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='datastage_flows_create')
+                                      operation_id='create_datastage_flows')
         headers.update(sdk_headers)
 
         params = {
@@ -296,7 +297,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def datastage_flows_get(self,
+    def get_datastage_flows(self,
         data_intg_flow_id: str,
         *,
         catalog_id: str = None,
@@ -325,7 +326,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='datastage_flows_get')
+                                      operation_id='get_datastage_flows')
         headers.update(sdk_headers)
 
         params = {
@@ -350,7 +351,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def datastage_flows_update(self,
+    def update_datastage_flows(self,
         data_intg_flow_id: str,
         data_intg_flow_name: str,
         *,
@@ -362,8 +363,8 @@ class DatastageV3(BaseService):
         """
         Update DataStage flow.
 
-        Modifies a data flow in the specified project or catalog (either project_id or
-        catalog_id must be set). All subsequent calls to use the data flow must specify
+        Modifies a data flow in the specified project or catalog (either `project_id` or
+        `catalog_id` must be set). All subsequent calls to use the data flow must specify
         the project or catalog ID the data flow was created in.
 
         :param str data_intg_flow_id: The DataStage flow ID to use.
@@ -387,7 +388,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='datastage_flows_update')
+                                      operation_id='update_datastage_flows')
         headers.update(sdk_headers)
 
         params = {
@@ -421,7 +422,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def datastage_flows_clone(self,
+    def clone_datastage_flows(self,
         data_intg_flow_id: str,
         *,
         catalog_id: str = None,
@@ -449,7 +450,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='datastage_flows_clone')
+                                      operation_id='clone_datastage_flows')
         headers.update(sdk_headers)
 
         params = {
@@ -474,7 +475,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def datastage_flows_compile(self,
+    def compile_datastage_flows(self,
         data_intg_flow_id: str,
         *,
         catalog_id: str = None,
@@ -486,7 +487,8 @@ class DatastageV3(BaseService):
         Compile DataStage flow to generate runtime assets.
 
         Generate the runtime assets for a DataStage flow in the specified project or
-        catalog (either project_id or catalog_id must be set) for specified runtime type.
+        catalog for a specified runtime type. Either project_id or catalog_id must be
+        specified.
 
         :param str data_intg_flow_id: The DataStage flow ID to use.
         :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
@@ -506,7 +508,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='datastage_flows_compile')
+                                      operation_id='compile_datastage_flows')
         headers.update(sdk_headers)
 
         params = {
@@ -532,11 +534,402 @@ class DatastageV3(BaseService):
         return response
 
     #########################
+    # DataStage subflows
+    #########################
+
+
+    def delete_datastage_subflows(self,
+        id: List[str],
+        *,
+        catalog_id: str = None,
+        project_id: str = None,
+        **kwargs
+    ) -> DetailedResponse:
+        """
+        Delete DataStage subflows.
+
+        Deletes the specified data subflows in a project or catalog (either `project_id`
+        or `catalog_id` must be set).
+        If the deletion of the data subflows will take some time to finish, then a 202
+        response will be returned and the deletion will continue asynchronously.
+
+        :param List[str] id: The list of DataStage subflow IDs to delete.
+        :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
+               or project_id is required.
+        :param str project_id: (optional) The ID of the project to use. catalog_id
+               or project_id is required.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse
+        """
+
+        if id is None:
+            raise ValueError('id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
+                                      service_version='V3',
+                                      operation_id='delete_datastage_subflows')
+        headers.update(sdk_headers)
+
+        params = {
+            'id': convert_list(id),
+            'catalog_id': catalog_id,
+            'project_id': project_id
+        }
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+
+        url = '/v3/data_intg_flows/subflows'
+        request = self.prepare_request(method='DELETE',
+                                       url=url,
+                                       headers=headers,
+                                       params=params)
+
+        response = self.send(request)
+        return response
+
+
+    def list_datastage_subflows(self,
+        *,
+        catalog_id: str = None,
+        project_id: str = None,
+        sort: str = None,
+        start: str = None,
+        limit: int = None,
+        entity_name: str = None,
+        entity_description: str = None,
+        **kwargs
+    ) -> DetailedResponse:
+        """
+        Get metadata and lock information for DataStage subflows.
+
+        Lists the metadata, entity and lock information for DataStage subflows that are
+        contained in the specified project.
+        Use the following parameters to filter the results:
+        | Field                    | Match type   | Example
+         |
+        | ------------------------ | ------------ |
+        --------------------------------------- |
+        | `entity.name`              | Equals           | `entity.name=MyDataStageSubFlow`
+         |
+        | `entity.name`              | Starts with      | `entity.name=starts:MyData`  |
+        | `entity.description`       | Equals           | `entity.description=movement`  |
+        | `entity.description`       | Starts with      | `entity.description=starts:data`
+         |
+        To sort the results, use one or more of the parameters  described in the following
+        section. If no sort key is specified, the results are sorted in descending order
+        on `metadata.create_time` (i.e. returning the most  recently created data flows
+        first).
+        | Field                          | Example |
+        | ------------------------- | ----------------------------------- |
+        | sort     | `sort=+entity.name` (sort by ascending name)  |
+        | sort     | `sort=-metadata.create_time` (sort by descending creation time) |
+        Multiple sort keys can be specified by delimiting them with a comma. For example,
+        to sort in descending order on `create_time` and then in ascending order on name
+        use: `sort=-metadata.create_time`,`+entity.name`.
+
+        :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
+               or project_id is required.
+        :param str project_id: (optional) The ID of the project to use. catalog_id
+               or project_id is required.
+        :param str sort: (optional) The field to sort the results on, including
+               whether to sort ascending (+) or descending (-), for example,
+               sort=-metadata.create_time.
+        :param str start: (optional) The page token indicating where to start
+               paging from.
+        :param int limit: (optional) The limit of the number of items to return,
+               for example limit=50. If not specified a default of 100 will be  used.
+        :param str entity_name: (optional) Filter results based on the specified
+               name.
+        :param str entity_description: (optional) Filter results based on the
+               specified description.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `DataFlowPagedCollection` object
+        """
+
+        headers = {}
+        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
+                                      service_version='V3',
+                                      operation_id='list_datastage_subflows')
+        headers.update(sdk_headers)
+
+        params = {
+            'catalog_id': catalog_id,
+            'project_id': project_id,
+            'sort': sort,
+            'start': start,
+            'limit': limit,
+            'entity.name': entity_name,
+            'entity.description': entity_description
+        }
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+        headers['Accept'] = 'application/json;charset=utf-8'
+
+        url = '/v3/data_intg_flows/subflows'
+        request = self.prepare_request(method='GET',
+                                       url=url,
+                                       headers=headers,
+                                       params=params)
+
+        response = self.send(request)
+        return response
+
+
+    def create_datastage_subflows(self,
+        data_intg_subflow_name: str,
+        *,
+        pipeline_flows: 'PipelineJson' = None,
+        catalog_id: str = None,
+        project_id: str = None,
+        asset_category: str = None,
+        **kwargs
+    ) -> DetailedResponse:
+        """
+        Create DataStage subflow.
+
+        Creates a DataStage subflow in the specified project or catalog (either
+        `project_id` or `catalog_id` must be set). All subsequent calls to use the data
+        flow must specify the project or catalog ID the data flow was created in.
+
+        :param str data_intg_subflow_name: The DataStage subflow name.
+        :param PipelineJson pipeline_flows: (optional) Pipeline flow to be stored.
+        :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
+               or project_id is required.
+        :param str project_id: (optional) The ID of the project to use. catalog_id
+               or project_id is required.
+        :param str asset_category: (optional) The category of the asset. Must be
+               either SYSTEM or USER. Only a registered service can use this parameter.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `DataIntgFlow` object
+        """
+
+        if data_intg_subflow_name is None:
+            raise ValueError('data_intg_subflow_name must be provided')
+        if pipeline_flows is not None:
+            pipeline_flows = convert_model(pipeline_flows)
+        headers = {}
+        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
+                                      service_version='V3',
+                                      operation_id='create_datastage_subflows')
+        headers.update(sdk_headers)
+
+        params = {
+            'data_intg_subflow_name': data_intg_subflow_name,
+            'catalog_id': catalog_id,
+            'project_id': project_id,
+            'asset_category': asset_category
+        }
+
+        data = {
+            'pipeline_flows': pipeline_flows
+        }
+        data = {k: v for (k, v) in data.items() if v is not None}
+        data = json.dumps(data)
+        headers['content-type'] = 'application/json;charset=utf-8'
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+        headers['Accept'] = 'application/json;charset=utf-8'
+
+        url = '/v3/data_intg_flows/subflows'
+        request = self.prepare_request(method='POST',
+                                       url=url,
+                                       headers=headers,
+                                       params=params,
+                                       data=data)
+
+        response = self.send(request)
+        return response
+
+
+    def get_datastage_subflows(self,
+        data_intg_subflow_id: str,
+        *,
+        catalog_id: str = None,
+        project_id: str = None,
+        **kwargs
+    ) -> DetailedResponse:
+        """
+        Get DataStage subflow.
+
+        Lists the DataStage subflow that is contained in the specified project.
+        Attachments, metadata and a limited number of attributes from the entity of each
+        DataStage flow is returned.
+
+        :param str data_intg_subflow_id: The DataStage subflow ID to use.
+        :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
+               or project_id is required.
+        :param str project_id: (optional) The ID of the project to use. catalog_id
+               or project_id is required.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `DataIntgFlowJson` object
+        """
+
+        if data_intg_subflow_id is None:
+            raise ValueError('data_intg_subflow_id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
+                                      service_version='V3',
+                                      operation_id='get_datastage_subflows')
+        headers.update(sdk_headers)
+
+        params = {
+            'catalog_id': catalog_id,
+            'project_id': project_id
+        }
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+        headers['Accept'] = 'application/json;charset=utf-8'
+
+        path_param_keys = ['data_intg_subflow_id']
+        path_param_values = self.encode_path_vars(data_intg_subflow_id)
+        path_param_dict = dict(zip(path_param_keys, path_param_values))
+        url = '/v3/data_intg_flows/subflows/{data_intg_subflow_id}'.format(**path_param_dict)
+        request = self.prepare_request(method='GET',
+                                       url=url,
+                                       headers=headers,
+                                       params=params)
+
+        response = self.send(request)
+        return response
+
+
+    def update_datastage_subflows(self,
+        data_intg_subflow_id: str,
+        data_intg_subflow_name: str,
+        *,
+        pipeline_flows: 'PipelineJson' = None,
+        catalog_id: str = None,
+        project_id: str = None,
+        **kwargs
+    ) -> DetailedResponse:
+        """
+        Update DataStage subflow.
+
+        Modifies a data subflow in the specified project or catalog (either `project_id`
+        or `catalog_id` must be set). All subsequent calls to use the data flow must
+        specify the project or catalog ID the data flow was created in.
+
+        :param str data_intg_subflow_id: The DataStage subflow ID to use.
+        :param str data_intg_subflow_name: The DataStage subflow name.
+        :param PipelineJson pipeline_flows: (optional) Pipeline flow to be stored.
+        :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
+               or project_id is required.
+        :param str project_id: (optional) The ID of the project to use. catalog_id
+               or project_id is required.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `DataIntgFlow` object
+        """
+
+        if data_intg_subflow_id is None:
+            raise ValueError('data_intg_subflow_id must be provided')
+        if data_intg_subflow_name is None:
+            raise ValueError('data_intg_subflow_name must be provided')
+        if pipeline_flows is not None:
+            pipeline_flows = convert_model(pipeline_flows)
+        headers = {}
+        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
+                                      service_version='V3',
+                                      operation_id='update_datastage_subflows')
+        headers.update(sdk_headers)
+
+        params = {
+            'data_intg_subflow_name': data_intg_subflow_name,
+            'catalog_id': catalog_id,
+            'project_id': project_id
+        }
+
+        data = {
+            'pipeline_flows': pipeline_flows
+        }
+        data = {k: v for (k, v) in data.items() if v is not None}
+        data = json.dumps(data)
+        headers['content-type'] = 'application/json;charset=utf-8'
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+        headers['Accept'] = 'application/json;charset=utf-8'
+
+        path_param_keys = ['data_intg_subflow_id']
+        path_param_values = self.encode_path_vars(data_intg_subflow_id)
+        path_param_dict = dict(zip(path_param_keys, path_param_values))
+        url = '/v3/data_intg_flows/subflows/{data_intg_subflow_id}'.format(**path_param_dict)
+        request = self.prepare_request(method='PUT',
+                                       url=url,
+                                       headers=headers,
+                                       params=params,
+                                       data=data)
+
+        response = self.send(request)
+        return response
+
+
+    def clone_datastage_subflows(self,
+        data_intg_subflow_id: str,
+        *,
+        catalog_id: str = None,
+        project_id: str = None,
+        **kwargs
+    ) -> DetailedResponse:
+        """
+        Clone DataStage subflow.
+
+        Create a DataStage subflow in the specified project or catalog based on an
+        existing DataStage subflow in the same project or catalog.
+
+        :param str data_intg_subflow_id: The DataStage subflow ID to use.
+        :param str catalog_id: (optional) The ID of the catalog to use. catalog_id
+               or project_id is required.
+        :param str project_id: (optional) The ID of the project to use. catalog_id
+               or project_id is required.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `DataIntgFlow` object
+        """
+
+        if data_intg_subflow_id is None:
+            raise ValueError('data_intg_subflow_id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
+                                      service_version='V3',
+                                      operation_id='clone_datastage_subflows')
+        headers.update(sdk_headers)
+
+        params = {
+            'catalog_id': catalog_id,
+            'project_id': project_id
+        }
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+        headers['Accept'] = 'application/json;charset=utf-8'
+
+        path_param_keys = ['data_intg_subflow_id']
+        path_param_values = self.encode_path_vars(data_intg_subflow_id)
+        path_param_dict = dict(zip(path_param_keys, path_param_values))
+        url = '/v3/data_intg_flows/subflows/{data_intg_subflow_id}/clone'.format(**path_param_dict)
+        request = self.prepare_request(method='POST',
+                                       url=url,
+                                       headers=headers,
+                                       params=params)
+
+        response = self.send(request)
+        return response
+
+    #########################
     # Migration
     #########################
 
 
-    def migration_create(self,
+    def create_migration(self,
         body: BinaryIO,
         *,
         catalog_id: str = None,
@@ -571,25 +964,25 @@ class DatastageV3(BaseService):
                the first error.
         :param str conflict_resolution: (optional) Resolution when data flow to be
                imported has a name conflict with an existing data flow in the project or
-               catalog. The default conflict resolution is "skip" will skip  the data flow
+               catalog. The default conflict resolution is "skip" will skip the data flow
                so that it will not be imported. The "rename" resolution will append
                "_Import_NNNN" suffix to the original name and use the new name for the
                imported data flow, while the "replace" resolution will first remove the
-               existing data flow with the same name and  import the new data flow. For
-               the "rename_replace" option, when the flow name is already used, a new flow
+               existing data flow with the same name and import the new data flow. For the
+               "rename_replace" option, when the flow name is already used, a new flow
                name with the suffix
                "_DATASTAGE_ISX_IMPORT" will be used. If the name is not currently used,
                the imported flow will be created with this name. In case the new name is
                already used, the existing flow will be removed  first before the imported
                flow is created. With the rename_replace option, job creation will be
-               determined  as follows. If the job name is already used, a new job name
-               with the suffix ".DataStage job" will be used. If the new job name is not
+               determined as follows. If the job name is already used, a new job name with
+               the suffix ".DataStage job" will be used. If the new job name is not
                currently used, the job will be created with this name. In case the new job
                name is already used, the job creation will not happen and an error will be
                raised.
         :param str attachment_type: (optional) Type of attachment. The default
                attachment type is "isx".
-        :param str file_name: (optional) Name of the input file (if exists).
+        :param str file_name: (optional) Name of the input file, if it exists.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `ImportResponse` object
@@ -600,7 +993,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='migration_create')
+                                      operation_id='create_migration')
         headers.update(sdk_headers)
 
         params = {
@@ -630,7 +1023,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def migration_delete(self,
+    def delete_migration(self,
         import_id: str,
         *,
         catalog_id: str = None,
@@ -658,7 +1051,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='migration_delete')
+                                      operation_id='delete_migration')
         headers.update(sdk_headers)
 
         params = {
@@ -682,7 +1075,7 @@ class DatastageV3(BaseService):
         return response
 
 
-    def migration_get(self,
+    def get_migration(self,
         import_id: str,
         *,
         catalog_id: str = None,
@@ -712,7 +1105,7 @@ class DatastageV3(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V3',
-                                      operation_id='migration_get')
+                                      operation_id='get_migration')
         headers.update(sdk_headers)
 
         params = {
@@ -737,9 +1130,9 @@ class DatastageV3(BaseService):
         return response
 
 
-class DatastageFlowsCreateEnums:
+class CreateDatastageFlowsEnums:
     """
-    Enums for datastage_flows_create parameters.
+    Enums for create_datastage_flows parameters.
     """
 
     class AssetCategory(str, Enum):
@@ -751,9 +1144,23 @@ class DatastageFlowsCreateEnums:
         USER = 'user'
 
 
-class MigrationCreateEnums:
+class CreateDatastageSubflowsEnums:
     """
-    Enums for migration_create parameters.
+    Enums for create_datastage_subflows parameters.
+    """
+
+    class AssetCategory(str, Enum):
+        """
+        The category of the asset. Must be either SYSTEM or USER. Only a registered
+        service can use this parameter.
+        """
+        SYSTEM = 'system'
+        USER = 'user'
+
+
+class CreateMigrationEnums:
+    """
+    Enums for create_migration parameters.
     """
 
     class OnFailure(str, Enum):
@@ -768,16 +1175,16 @@ class MigrationCreateEnums:
         """
         Resolution when data flow to be imported has a name conflict with an existing data
         flow in the project or catalog. The default conflict resolution is "skip" will
-        skip  the data flow so that it will not be imported. The "rename" resolution will
+        skip the data flow so that it will not be imported. The "rename" resolution will
         append "_Import_NNNN" suffix to the original name and use the new name for the
         imported data flow, while the "replace" resolution will first remove the existing
-        data flow with the same name and  import the new data flow. For the
+        data flow with the same name and import the new data flow. For the
         "rename_replace" option, when the flow name is already used, a new flow name with
         the suffix
         "_DATASTAGE_ISX_IMPORT" will be used. If the name is not currently used, the
         imported flow will be created with this name. In case the new name is already
         used, the existing flow will be removed  first before the imported flow is
-        created. With the rename_replace option, job creation will be determined  as
+        created. With the rename_replace option, job creation will be determined as
         follows. If the job name is already used, a new job name with the suffix
         ".DataStage job" will be used. If the new job name is not currently used, the job
         will be created with this name. In case the new job name is already used, the job
@@ -877,7 +1284,7 @@ class AssetSystemMetadata():
     :attr str asset_id: (optional) The ID of the asset.
     :attr str asset_type: (optional) The type of the asset.
     :attr str catalog_id: (optional) The ID of the catalog which contains the asset.
-          catalog_id or project_id is required.
+          `catalog_id` or `project_id` is required.
     :attr datetime create_time: (optional) The timestamp when the asset was created
           (in format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the
           date-time format as specified by RFC 3339).
@@ -887,7 +1294,7 @@ class AssetSystemMetadata():
     :attr str name: (optional) name of the asset.
     :attr str origin_country: (optional) origin of the asset.
     :attr str project_id: (optional) The ID of the project which contains the asset.
-          catalog_id or project_id is required.
+          `catalog_id` or `project_id` is required.
     :attr str resource_key: (optional) This is a unique string that uniquely
           identifies an asset.
     :attr int size: (optional) size of the asset.
@@ -922,7 +1329,7 @@ class AssetSystemMetadata():
         :param str asset_id: (optional) The ID of the asset.
         :param str asset_type: (optional) The type of the asset.
         :param str catalog_id: (optional) The ID of the catalog which contains the
-               asset. catalog_id or project_id is required.
+               asset. `catalog_id` or `project_id` is required.
         :param datetime create_time: (optional) The timestamp when the asset was
                created (in format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
                matching the date-time format as specified by RFC 3339).
@@ -933,7 +1340,7 @@ class AssetSystemMetadata():
         :param str name: (optional) name of the asset.
         :param str origin_country: (optional) origin of the asset.
         :param str project_id: (optional) The ID of the project which contains the
-               asset. catalog_id or project_id is required.
+               asset. `catalog_id` or `project_id` is required.
         :param str resource_key: (optional) This is a unique string that uniquely
                identifies an asset.
         :param int size: (optional) size of the asset.
@@ -1273,6 +1680,7 @@ class DataImportError():
 
     :attr str description: (optional) additional error text.
     :attr str name: error object name.
+    :attr str stage_type: (optional) error stage type.
     :attr str type: error type.
     """
 
@@ -1280,16 +1688,19 @@ class DataImportError():
                  name: str,
                  type: str,
                  *,
-                 description: str = None) -> None:
+                 description: str = None,
+                 stage_type: str = None) -> None:
         """
         Initialize a DataImportError object.
 
         :param str name: error object name.
         :param str type: error type.
         :param str description: (optional) additional error text.
+        :param str stage_type: (optional) error stage type.
         """
         self.description = description
         self.name = name
+        self.stage_type = stage_type
         self.type = type
 
     @classmethod
@@ -1302,6 +1713,8 @@ class DataImportError():
             args['name'] = _dict.get('name')
         else:
             raise ValueError('Required property \'name\' not present in DataImportError JSON')
+        if 'stage_type' in _dict:
+            args['stage_type'] = _dict.get('stage_type')
         if 'type' in _dict:
             args['type'] = _dict.get('type')
         else:
@@ -1320,6 +1733,8 @@ class DataImportError():
             _dict['description'] = self.description
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
+        if hasattr(self, 'stage_type') and self.stage_type is not None:
+            _dict['stage_type'] = self.stage_type
         if hasattr(self, 'type') and self.type is not None:
             _dict['type'] = self.type
         return _dict
@@ -1378,6 +1793,13 @@ class DataImportError():
         PARAMETER_SET_CREATION_ERROR = 'parameter_set_creation_error'
         DISTRIBUTED_LOCK_ERROR = 'distributed_lock_error'
         DUPLICATE_OBJECT_ERROR = 'duplicate_object_error'
+        UNBOUND_OBJECT_REFERENCE = 'unbound_object_reference'
+        TABLE_DEF_CREATION_ERROR = 'table_def_creation_error'
+        CONNECTION_CREATION_API_ERROR = 'connection_creation_api_error'
+        CONNECTION_PATCH_API_ERROR = 'connection_patch_api_error'
+        CONNECTION_DELETION_API_ERROR = 'connection_deletion_api_error'
+        SEQUENCE_JOB_CREATION_ERROR = 'sequence_job_creation_error'
+        UNSUPPORTED_STAGE_TYPE_IN_SUBFLOW = 'unsupported_stage_type_in_subflow'
 
 
 class DataIntgFlow():
@@ -1462,6 +1884,7 @@ class DataIntgFlowEntity():
     The underlying DataStage flow definition.
 
     :attr object data_intg_flow: (optional) Asset type object.
+    :attr object data_intg_subflow: (optional) Asset type object.
     :attr str description: (optional) The description of the DataStage flow.
     :attr DataIntgFlowLock lock: (optional) Lock information for a DataStage flow
           asset.
@@ -1474,6 +1897,7 @@ class DataIntgFlowEntity():
     def __init__(self,
                  *,
                  data_intg_flow: object = None,
+                 data_intg_subflow: object = None,
                  description: str = None,
                  lock: 'DataIntgFlowLock' = None,
                  name: str = None,
@@ -1483,6 +1907,7 @@ class DataIntgFlowEntity():
         Initialize a DataIntgFlowEntity object.
 
         :param object data_intg_flow: (optional) Asset type object.
+        :param object data_intg_subflow: (optional) Asset type object.
         :param str description: (optional) The description of the DataStage flow.
         :param DataIntgFlowLock lock: (optional) Lock information for a DataStage
                flow asset.
@@ -1493,6 +1918,7 @@ class DataIntgFlowEntity():
                created it.
         """
         self.data_intg_flow = data_intg_flow
+        self.data_intg_subflow = data_intg_subflow
         self.description = description
         self.lock = lock
         self.name = name
@@ -1505,6 +1931,8 @@ class DataIntgFlowEntity():
         args = {}
         if 'data_intg_flow' in _dict:
             args['data_intg_flow'] = _dict.get('data_intg_flow')
+        if 'data_intg_subflow' in _dict:
+            args['data_intg_subflow'] = _dict.get('data_intg_subflow')
         if 'description' in _dict:
             args['description'] = _dict.get('description')
         if 'lock' in _dict:
@@ -1527,6 +1955,8 @@ class DataIntgFlowEntity():
         _dict = {}
         if hasattr(self, 'data_intg_flow') and self.data_intg_flow is not None:
             _dict['data_intg_flow'] = self.data_intg_flow
+        if hasattr(self, 'data_intg_subflow') and self.data_intg_subflow is not None:
+            _dict['data_intg_subflow'] = self.data_intg_subflow
         if hasattr(self, 'description') and self.description is not None:
             _dict['description'] = self.description
         if hasattr(self, 'lock') and self.lock is not None:
@@ -1821,7 +2251,7 @@ class FlowCompileResponse():
     Describes the compile response model.
 
     :attr object message: (optional) Compile result for DataStage flow.
-    :attr str type: (optional) Compile response type. e.g. ok or error.
+    :attr str type: (optional) Compile response type. For example ok or error.
     """
 
     def __init__(self,
@@ -1832,7 +2262,7 @@ class FlowCompileResponse():
         Initialize a FlowCompileResponse object.
 
         :param object message: (optional) Compile result for DataStage flow.
-        :param str type: (optional) Compile response type. e.g. ok or error.
+        :param str type: (optional) Compile response type. For example ok or error.
         """
         self.message = message
         self.type = type
@@ -1947,8 +2377,6 @@ class ImportCount():
     :attr int imported: Total number of data flows successfully imported.
     :attr int parameter_sets_total: (optional) Total number of parameter sets.
     :attr int pending: Total number of data flows that have not been processed.
-    :attr int px_containers_total: (optional) Total number of parallel job
-          containers.
     :attr int renamed: Total number of data flows successfully imported and renamed
           due to a name conflict. The renamed count is included in the imported count.
     :attr int replaced: Total number of existing data flows replaced by imported
@@ -1956,6 +2384,7 @@ class ImportCount():
     :attr int sequence_jobs_total: (optional) Total number of sequence jobs.
     :attr int skipped: Total number of data flows skipped due to name conflicts. The
           skipped count is not included in the failed count or imported count.
+    :attr int subflows_total: (optional) Total number of parallel job subflows.
     :attr int table_definitions_total: (optional) Total number of table definitions.
     :attr int total: Total number of data flows to be imported.
     :attr int unsupported: Total number of unsupported resources in the import file.
@@ -1974,8 +2403,8 @@ class ImportCount():
                  *,
                  connections_total: int = None,
                  parameter_sets_total: int = None,
-                 px_containers_total: int = None,
                  sequence_jobs_total: int = None,
+                 subflows_total: int = None,
                  table_definitions_total: int = None) -> None:
         """
         Initialize a ImportCount object.
@@ -2000,9 +2429,9 @@ class ImportCount():
                file.
         :param int connections_total: (optional) Total number of data connections.
         :param int parameter_sets_total: (optional) Total number of parameter sets.
-        :param int px_containers_total: (optional) Total number of parallel job
-               containers.
         :param int sequence_jobs_total: (optional) Total number of sequence jobs.
+        :param int subflows_total: (optional) Total number of parallel job
+               subflows.
         :param int table_definitions_total: (optional) Total number of table
                definitions.
         """
@@ -2012,11 +2441,11 @@ class ImportCount():
         self.imported = imported
         self.parameter_sets_total = parameter_sets_total
         self.pending = pending
-        self.px_containers_total = px_containers_total
         self.renamed = renamed
         self.replaced = replaced
         self.sequence_jobs_total = sequence_jobs_total
         self.skipped = skipped
+        self.subflows_total = subflows_total
         self.table_definitions_total = table_definitions_total
         self.total = total
         self.unsupported = unsupported
@@ -2045,8 +2474,6 @@ class ImportCount():
             args['pending'] = _dict.get('pending')
         else:
             raise ValueError('Required property \'pending\' not present in ImportCount JSON')
-        if 'px_containers_total' in _dict:
-            args['px_containers_total'] = _dict.get('px_containers_total')
         if 'renamed' in _dict:
             args['renamed'] = _dict.get('renamed')
         else:
@@ -2061,6 +2488,8 @@ class ImportCount():
             args['skipped'] = _dict.get('skipped')
         else:
             raise ValueError('Required property \'skipped\' not present in ImportCount JSON')
+        if 'subflows_total' in _dict:
+            args['subflows_total'] = _dict.get('subflows_total')
         if 'table_definitions_total' in _dict:
             args['table_definitions_total'] = _dict.get('table_definitions_total')
         if 'total' in _dict:
@@ -2093,8 +2522,6 @@ class ImportCount():
             _dict['parameter_sets_total'] = self.parameter_sets_total
         if hasattr(self, 'pending') and self.pending is not None:
             _dict['pending'] = self.pending
-        if hasattr(self, 'px_containers_total') and self.px_containers_total is not None:
-            _dict['px_containers_total'] = self.px_containers_total
         if hasattr(self, 'renamed') and self.renamed is not None:
             _dict['renamed'] = self.renamed
         if hasattr(self, 'replaced') and self.replaced is not None:
@@ -2103,6 +2530,8 @@ class ImportCount():
             _dict['sequence_jobs_total'] = self.sequence_jobs_total
         if hasattr(self, 'skipped') and self.skipped is not None:
             _dict['skipped'] = self.skipped
+        if hasattr(self, 'subflows_total') and self.subflows_total is not None:
+            _dict['subflows_total'] = self.subflows_total
         if hasattr(self, 'table_definitions_total') and self.table_definitions_total is not None:
             _dict['table_definitions_total'] = self.table_definitions_total
         if hasattr(self, 'total') and self.total is not None:
@@ -2327,6 +2756,14 @@ class ImportFlow():
         TABLE_DEFINITION_REPLACEMENT_FAILED = 'table_definition_replacement_failed'
         TABLE_DEFINITION_RENAMED = 'table_definition_renamed'
         TABLE_DEFINITION_SKIPPED = 'table_definition_skipped'
+        SEQUENCE_JOB_REPLACEMENT_SUCCEEDED = 'sequence_job_replacement_succeeded'
+        SEQUENCE_JOB_REPLACEMENT_FAILED = 'sequence_job_replacement_failed'
+        SEQUENCE_JOB_RENAMED = 'sequence_job_renamed'
+        SEQUENCE_JOB_SKIPPED = 'sequence_job_skipped'
+        SUBFLOW_REPLACEMENT_SUCCEEDED = 'subflow_replacement_succeeded'
+        SUBFLOW_REPLACEMENT_FAILED = 'subflow_replacement_failed'
+        SUBFLOW_RENAMED = 'subflow_renamed'
+        SUBFLOW_SKIPPED = 'subflow_skipped'
 
 
     class JobTypeEnum(str, Enum):
@@ -2371,7 +2808,7 @@ class ImportFlow():
         CONNECTION = 'connection'
         TABLE_DEF = 'table_def'
         PARAMETER_SET = 'parameter_set'
-        PX_CONTAINER = 'px_container'
+        SUBFLOW = 'subflow'
         SEQUENCE_JOB = 'sequence_job'
 
 
@@ -2457,15 +2894,102 @@ class ImportFlowWarning():
         """
         UNRELEASED_STAGE_TYPE = 'unreleased_stage_type'
         UNRELEASED_FEATURE = 'unreleased_feature'
-        UNSUPPORTED_CREDENTIALS_FILE = 'unsupported_credentials_file'
+        CREDENTIALS_FILE_WARNING = 'credentials_file_warning'
+        TRANSFORMER_TRIGGER_UNSUPPORTED = 'transformer_trigger_unsupported'
+        TRANSFORMER_BUILDTAB_UNSUPPORTED = 'transformer_buildtab_unsupported'
+        UNSUPPORTED_SECURE_GATEWAY = 'unsupported_secure_gateway'
+        PLACEHOLDER_CONNECTION_PARAMETERS = 'placeholder_connection_parameters'
+        DESCRIPTION_TRUNCATED = 'description_truncated'
+        EMPTY_STAGE_LIST = 'empty_stage_list'
+        MISSING_PARAMETER_SET = 'missing_parameter_set'
 
+
+class ImportNotification():
+    """
+    Import event notification.
+
+    :attr datetime created_at: The timestamp when the import notification was
+          created. In format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching
+          the date-time format as specified by RFC 3339.
+    :attr str id: Notification id.
+    :attr str status: Import status associated with the notification.
+    """
+
+    def __init__(self,
+                 created_at: datetime,
+                 id: str,
+                 status: str) -> None:
+        """
+        Initialize a ImportNotification object.
+
+        :param datetime created_at: The timestamp when the import notification was
+               created. In format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
+               matching the date-time format as specified by RFC 3339.
+        :param str id: Notification id.
+        :param str status: Import status associated with the notification.
+        """
+        self.created_at = created_at
+        self.id = id
+        self.status = status
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ImportNotification':
+        """Initialize a ImportNotification object from a json dictionary."""
+        args = {}
+        if 'created_at' in _dict:
+            args['created_at'] = string_to_datetime(_dict.get('created_at'))
+        else:
+            raise ValueError('Required property \'created_at\' not present in ImportNotification JSON')
+        if 'id' in _dict:
+            args['id'] = _dict.get('id')
+        else:
+            raise ValueError('Required property \'id\' not present in ImportNotification JSON')
+        if 'status' in _dict:
+            args['status'] = _dict.get('status')
+        else:
+            raise ValueError('Required property \'status\' not present in ImportNotification JSON')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ImportNotification object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'created_at') and self.created_at is not None:
+            _dict['created_at'] = datetime_to_string(self.created_at)
+        if hasattr(self, 'id') and self.id is not None:
+            _dict['id'] = self.id
+        if hasattr(self, 'status') and self.status is not None:
+            _dict['status'] = self.status
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ImportNotification object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ImportNotification') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ImportNotification') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
 
 class ImportResponse():
     """
     Response object of an import request.
 
-    :attr ImportResponseEntity entity: import response entity.
-    :attr ImportResponseMetadata metadata: import response metadata.
+    :attr ImportResponseEntity entity: Import the response entity.
+    :attr ImportResponseMetadata metadata: Import the response metadata.
     """
 
     def __init__(self,
@@ -2474,8 +2998,8 @@ class ImportResponse():
         """
         Initialize a ImportResponse object.
 
-        :param ImportResponseEntity entity: import response entity.
-        :param ImportResponseMetadata metadata: import response metadata.
+        :param ImportResponseEntity entity: Import the response entity.
+        :param ImportResponseMetadata metadata: Import the response metadata.
         """
         self.entity = entity
         self.metadata = metadata
@@ -2528,10 +3052,10 @@ class ImportResponse():
 
 class ImportResponseEntity():
     """
-    import response entity.
+    Import the response entity.
 
     :attr str cancelled_by: (optional) Account ID of the user who cancelled the
-          import request. This field is required only when the status  field is
+          import request. This field is required only when the status field is
           "cancelled".
     :attr str conflict_resolution: (optional) The conflict_resolution option used
           for the import.
@@ -2542,6 +3066,8 @@ class ImportResponseEntity():
           imported. Each ImportFlow object contains status for the individual data flow
           import operation.
     :attr str name: (optional) Name of the import request.
+    :attr List[ImportNotification] notifications: (optional) Import event
+          notifications.
     :attr str on_failure: (optional) The on_failure option used for the import.
     :attr int remaining_time: (optional) Estimate of remaining time in seconds.
     :attr datetime start_time: (optional) The timestamp when the import opearton
@@ -2561,6 +3087,7 @@ class ImportResponseEntity():
                  conflict_resolution: str = None,
                  end_time: datetime = None,
                  name: str = None,
+                 notifications: List['ImportNotification'] = None,
                  on_failure: str = None,
                  remaining_time: int = None,
                  start_time: datetime = None,
@@ -2573,7 +3100,7 @@ class ImportResponseEntity():
                flow import operation.
         :param str status: import status.
         :param str cancelled_by: (optional) Account ID of the user who cancelled
-               the import request. This field is required only when the status  field is
+               the import request. This field is required only when the status field is
                "cancelled".
         :param str conflict_resolution: (optional) The conflict_resolution option
                used for the import.
@@ -2581,6 +3108,8 @@ class ImportResponseEntity():
                completed. In format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
                matching the date-time format as specified by RFC 3339.
         :param str name: (optional) Name of the import request.
+        :param List[ImportNotification] notifications: (optional) Import event
+               notifications.
         :param str on_failure: (optional) The on_failure option used for the
                import.
         :param int remaining_time: (optional) Estimate of remaining time in
@@ -2598,6 +3127,7 @@ class ImportResponseEntity():
         self.end_time = end_time
         self.import_data_flows = import_data_flows
         self.name = name
+        self.notifications = notifications
         self.on_failure = on_failure
         self.remaining_time = remaining_time
         self.start_time = start_time
@@ -2620,6 +3150,8 @@ class ImportResponseEntity():
             raise ValueError('Required property \'import_data_flows\' not present in ImportResponseEntity JSON')
         if 'name' in _dict:
             args['name'] = _dict.get('name')
+        if 'notifications' in _dict:
+            args['notifications'] = [ImportNotification.from_dict(x) for x in _dict.get('notifications')]
         if 'on_failure' in _dict:
             args['on_failure'] = _dict.get('on_failure')
         if 'remaining_time' in _dict:
@@ -2652,6 +3184,8 @@ class ImportResponseEntity():
             _dict['import_data_flows'] = [x.to_dict() for x in self.import_data_flows]
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
+        if hasattr(self, 'notifications') and self.notifications is not None:
+            _dict['notifications'] = [x.to_dict() for x in self.notifications]
         if hasattr(self, 'on_failure') and self.on_failure is not None:
             _dict['on_failure'] = self.on_failure
         if hasattr(self, 'remaining_time') and self.remaining_time is not None:
@@ -2695,7 +3229,7 @@ class ImportResponseEntity():
 
 class ImportResponseMetadata():
     """
-    import response metadata.
+    Import the response metadata.
 
     :attr str catalog_id: (optional) Catalog id.
     :attr datetime created_at: (optional) The timestamp when the import API was
@@ -2980,6 +3514,7 @@ class Pipelines():
     :attr object app_data: (optional) Object containing app-specific data.
     :attr str description: (optional) A brief description of the DataStage flow.
     :attr str id: (optional) Unique identifier.
+    :attr str name: (optional) Name of the pipeline.
     :attr List[object] nodes: (optional) Array of pipeline nodes.
     :attr str runtime_ref: (optional) Reference to the runtime type.
     """
@@ -2989,6 +3524,7 @@ class Pipelines():
                  app_data: object = None,
                  description: str = None,
                  id: str = None,
+                 name: str = None,
                  nodes: List[object] = None,
                  runtime_ref: str = None) -> None:
         """
@@ -2998,12 +3534,14 @@ class Pipelines():
         :param str description: (optional) A brief description of the DataStage
                flow.
         :param str id: (optional) Unique identifier.
+        :param str name: (optional) Name of the pipeline.
         :param List[object] nodes: (optional) Array of pipeline nodes.
         :param str runtime_ref: (optional) Reference to the runtime type.
         """
         self.app_data = app_data
         self.description = description
         self.id = id
+        self.name = name
         self.nodes = nodes
         self.runtime_ref = runtime_ref
 
@@ -3017,6 +3555,8 @@ class Pipelines():
             args['description'] = _dict.get('description')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
         if 'nodes' in _dict:
             args['nodes'] = _dict.get('nodes')
         if 'runtime_ref' in _dict:
@@ -3037,6 +3577,8 @@ class Pipelines():
             _dict['description'] = self.description
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
         if hasattr(self, 'nodes') and self.nodes is not None:
             _dict['nodes'] = self.nodes
         if hasattr(self, 'runtime_ref') and self.runtime_ref is not None:
