@@ -1,6 +1,6 @@
 # IBM DataStage SDK for Python
 
-Python client library to interact with various [IBM Cloud Datastage APIs](https://cloud.ibm.com/apidocs?category=datastage).
+Python client library to interact with various [IBM Cloud Datastage APIs](https://cloud.ibm.com/apidocs/datastage).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
