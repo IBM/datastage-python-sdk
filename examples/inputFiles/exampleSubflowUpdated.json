@@ -1,0 +1,350 @@
+{
+	"doc_type": "subpipeline",
+	"version": "3.0",
+	"json_schema": "https://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+	"id": "0059f0ed-7069-4571367-50884268c14b",
+	"primary_pipeline": "b2456f91-568b-4bbbfa2-6d9dbd7838b8",
+	"pipelines": [
+		{
+			"id": "b2456f91-568b-4bbbfa2-6d9dbd7838b8",
+			"runtime_ref": "pxOsh",
+			"nodes": [
+				{
+					"outputs": [
+						{
+							"id": "23933e70-1408-4f0f-bf7a-e00cb09fa5bd",
+							"app_data": {
+								"datastage": {
+									"is_source_of_link": "db6e0275-4c3f-41dd-804f-77c273b53c2b"
+								},
+								"ui_data": {
+									"label": "outPort"
+								}
+							},
+							"schema_ref": "606d83c4-c340-46db-802c-13eb4cdc5404"
+						}
+					],
+					"id": "9bb04a97-0892-4116-b1bb-98cb5da36033",
+					"type": "binding",
+					"app_data": {
+						"datastage": {
+							"outputs_order": "23933e70-1408-4f0f-bf7a-e00cb09fa5bd"
+						},
+						"ui_data": {
+							"image": "",
+							"x_pos": 48,
+							"label": "Entrynode1",
+							"y_pos": 48
+						}
+					}
+				},
+				{
+					"outputs": [
+						{
+							"id": "3c6edc1d-da25-44cb-b80c-f6f216a8a6f2",
+							"app_data": {
+								"datastage": {
+									"is_source_of_link": "95daf7c5-41c0-45d6-a105-833709fbcbd6"
+								},
+								"ui_data": {
+									"label": "outPort"
+								}
+							},
+							"schema_ref": "33148a26-7d86-41bf-9d95-b865d184e926"
+						}
+					],
+					"op": "PxSort",
+					"inputs": [
+						{
+							"links": [
+								{
+									"node_id_ref": "9bb04a97-0892-4116-b1bb-98cb5da36033",
+									"type_attr": "PRIMARY",
+									"id": "db6e0275-4c3f-41dd-804f-77c273b53c2b",
+									"link_name": "DSLink1B",
+									"app_data": {
+										"datastage": {
+										},
+										"ui_data": {
+											"decorations": [
+												{
+													"path": "",
+													"outline": true,
+													"hotspot": false,
+													"id": "DSLink1B",
+													"label": "DSLink1B",
+													"position": "middle",
+													"class_name": ""
+												}
+											]
+										}
+									},
+									"port_id_ref": "23933e70-1408-4f0f-bf7a-e00cb09fa5bd"
+								}
+							],
+							"id": "80a55420-a8c4-4d3d-8911-b26fa49065bb",
+							"app_data": {
+								"datastage": {
+								},
+								"ui_data": {
+									"label": "inPort"
+								}
+							},
+							"parameters": {
+								"runtime_column_propagation": 0
+							},
+							"schema_ref": "606d83c4-c340-46db-802c-13eb4cdc5404"
+						}
+					],
+					"id": "9ff15aa6-d018-4a83-b592-c9f5fdac575b",
+					"type": "execution_node",
+					"app_data": {
+						"datastage": {
+							"inputs_order": "80a55420-a8c4-4d3d-8911-b26fa49065bb",
+							"outputs_order": "3c6edc1d-da25-44cb-b80c-f6f216a8a6f2"
+						},
+						"ui_data": {
+							"image": "../graphics/palette/PxSort.svg",
+							"x_pos": 216,
+							"label": "Sort_2",
+							"y_pos": 48
+						}
+					},
+					"parameters": {
+						"keyProperties": [
+							{
+								"sorted-clustered": "",
+								"asc-desc": "dsc",
+								"key": "col2"
+							}
+						],
+						"output_count": 1,
+						"stats": "",
+						"input_count": 1,
+						"stable": "stable",
+						"unique": "",
+						"flagCluster": "",
+						"allow_column_mapping": true,
+						"operator": "tsort",
+						"flagKey": ""
+					}
+				},
+				{
+					"inputs": [
+						{
+							"links": [
+								{
+									"node_id_ref": "9ff15aa6-d018-4a83-b592-c9f5fdac575b",
+									"type_attr": "PRIMARY",
+									"id": "95daf7c5-41c0-45d6-a105-833709fbcbd6",
+									"link_name": "DSLink2B",
+									"app_data": {
+										"datastage": {
+										},
+										"ui_data": {
+											"decorations": [
+												{
+													"path": "",
+													"outline": true,
+													"hotspot": false,
+													"id": "DSLink2B",
+													"label": "DSLink2B",
+													"position": "middle",
+													"class_name": ""
+												}
+											]
+										}
+									},
+									"port_id_ref": "3c6edc1d-da25-44cb-b80c-f6f216a8a6f2"
+								}
+							],
+							"id": "20415ae4-4b75-400a-b183-0f52241e32e3",
+							"app_data": {
+								"datastage": {
+								},
+								"ui_data": {
+									"label": "inPort"
+								}
+							},
+							"schema_ref": "33148a26-7d86-41bf-9d95-b865d184e926"
+						}
+					],
+					"id": "535afa26-96a0-401a-93f2-6e79e8dc4ded",
+					"type": "binding",
+					"app_data": {
+						"datastage": {
+							"inputs_order": "20415ae4-4b75-400a-b183-0f52241e32e3"
+						},
+						"ui_data": {
+							"image": "",
+							"x_pos": 384,
+							"label": "Exitnode1",
+							"y_pos": 48
+						}
+					}
+				}
+			],
+			"app_data": {
+				"datastage": {
+					"runtimecolumnpropagation": "true"
+				},
+				"ui_data": {
+					"comments": [
+					]
+				}
+			}
+		}
+	],
+	"schemas": [
+		{
+			"id": "606d83c4-c340-46db-802c-13eb4cdc5404",
+			"fields": [
+				{
+					"metadata": {
+						"item_index": 0,
+						"is_key": true,
+						"min_length": 0,
+						"decimal_scale": 0,
+						"decimal_precision": 0,
+						"max_length": 0,
+						"is_signed": true
+					},
+					"nullable": false,
+					"name": "col1",
+					"type": "integer",
+					"app_data": {
+						"column_reference": "col1",
+						"odbc_type": "INTEGER",
+						"table_def": "Basic3\\\\Basic3\\\\Basic3",
+						"is_unicode_string": false,
+						"type_code": "INT32"
+					}
+				},
+				{
+					"metadata": {
+						"item_index": 0,
+						"is_key": false,
+						"min_length": 5,
+						"decimal_scale": 0,
+						"decimal_precision": 0,
+						"max_length": 5,
+						"is_signed": false
+					},
+					"nullable": false,
+					"name": "col2",
+					"type": "string",
+					"app_data": {
+						"column_reference": "col2",
+						"odbc_type": "CHAR",
+						"table_def": "Basic3\\\\Basic3\\\\Basic3",
+						"is_unicode_string": false,
+						"type_code": "STRING"
+					}
+				},
+				{
+					"metadata": {
+						"item_index": 0,
+						"is_key": false,
+						"min_length": 0,
+						"decimal_scale": 0,
+						"decimal_precision": 0,
+						"max_length": 10,
+						"is_signed": false
+					},
+					"nullable": false,
+					"name": "col3",
+					"type": "string",
+					"app_data": {
+						"column_reference": "col3",
+						"odbc_type": "VARCHAR",
+						"table_def": "Basic3\\\\Basic3\\\\Basic3",
+						"is_unicode_string": false,
+						"type_code": "STRING"
+					}
+				}
+			]
+		},
+		{
+			"id": "33148a26-7d86-41bf-9d95-b865d184e926",
+			"fields": [
+				{
+					"metadata": {
+						"item_index": 0,
+						"is_key": true,
+						"min_length": 0,
+						"decimal_scale": 0,
+						"decimal_precision": 0,
+						"source_field_id": "DSLink1B.col1",
+						"max_length": 0,
+						"is_signed": true
+					},
+					"nullable": false,
+					"name": "col1",
+					"type": "integer",
+					"app_data": {
+						"column_reference": "col1",
+						"odbc_type": "INTEGER",
+						"table_def": "Basic3\\\\Basic3\\\\Basic3",
+						"is_unicode_string": false,
+						"type_code": "INT32"
+					}
+				},
+				{
+					"metadata": {
+						"item_index": 0,
+						"is_key": false,
+						"min_length": 5,
+						"decimal_scale": 0,
+						"decimal_precision": 0,
+						"source_field_id": "DSLink1B.col2",
+						"max_length": 5,
+						"is_signed": false
+					},
+					"nullable": false,
+					"name": "col2",
+					"type": "string",
+					"app_data": {
+						"column_reference": "col2",
+						"odbc_type": "CHAR",
+						"table_def": "Basic3\\\\Basic3\\\\Basic3",
+						"is_unicode_string": false,
+						"type_code": "STRING"
+					}
+				},
+				{
+					"metadata": {
+						"item_index": 0,
+						"is_key": false,
+						"min_length": 0,
+						"decimal_scale": 0,
+						"decimal_precision": 0,
+						"source_field_id": "DSLink1B.col3",
+						"max_length": 10,
+						"is_signed": false
+					},
+					"nullable": false,
+					"name": "col3",
+					"type": "string",
+					"app_data": {
+						"column_reference": "col3",
+						"odbc_type": "VARCHAR",
+						"table_def": "Basic3\\\\Basic3\\\\Basic3",
+						"is_unicode_string": false,
+						"type_code": "STRING"
+					}
+				}
+			]
+		}
+	],
+	"runtimes": [
+		{
+			"name": "pxOsh",
+			"id": "pxOsh"
+		}
+	],
+	"app_data": {
+		"datastage": {
+			"version": "3.0.2"
+		}
+	}
+}
