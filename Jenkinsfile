@@ -91,7 +91,7 @@ void defaultInit() {
   }
 
   doVersionBump = { isDevRelease, newVersion, allowDirty ->
-    sh "bump2version --new-version ${newVersion} ${allowDirty ? '--allow-dirty': ''} ${isDevRelease ? '--no-commit' : '--tag --tag-message "Release {new_version}"'} patch"
+    sh "/home/jenkins/.local/bin/bump2version --new-version ${newVersion} ${allowDirty ? '--allow-dirty': ''} ${isDevRelease ? '--no-commit' : '--tag --tag-message "Release {new_version}"'} patch"
   }
 
   getNextVersion = { isDevRelease ->
