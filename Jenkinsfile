@@ -96,7 +96,7 @@ void defaultInit() {
 
   getNextVersion = { isDevRelease ->
     // Identify what the next patch version is
-    patchBumpedVersion = sh returnStdout: true, script: 'bump2version --list --dry-run patch | grep new_version=.* | cut -f2 -d='
+    patchBumpedVersion = sh returnStdout: true, script: '/home/jenkins/.local/bin/bump2version --list --dry-run patch | grep new_version=.* | cut -f2 -d='
     // Now the customized new version
     return getNewVersion(isDevRelease, patchBumpedVersion)
   }
