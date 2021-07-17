@@ -35,7 +35,13 @@ pipeline {
               git config --global credential.helper "!f() { echo password=${GH_CREDS_PSW}; echo; }; f"
               set +e
                 pip3 install --upgrade bump2version
-                python3 --version
+                echo "Installing python..."
+                lsb_release -a
+                sudo add-apt-repository ppa:deadsnakes/ppa 2>&1 | tail -n 1
+                sudo apt-get -qq update 2>&1 > /dev/null
+                sudo apt-get -qq -y install python3.7 2>&1 > /dev/null
+                echo "Using python version: $(python3.7 --version)"
+                python3.7 --version
               set -e
             '''
           }
@@ -64,9 +70,10 @@ pipeline {
           sh 'git push --tags origin HEAD:main'
           //publishPublic()
           sh'''
-              python3 -m pip install --upgrade pip setuptools twine
-              python3 -m build
-              python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*  --username ${TWINE_USERNAME} --password ${TWINE_PASSWORD} --verbose
+              python3.7 -m pip install -U pip
+              python3.7 -m pip install --upgrade pip setuptools twine
+              python3.7 setup.py sdist
+              python3.7 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*  --username ${TWINE_USERNAME} --password ${TWINE_PASSWORD} --verbose
           '''
           //publishDocs()
         }
