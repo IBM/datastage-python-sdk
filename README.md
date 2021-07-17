@@ -53,7 +53,7 @@ Service Name | Module Name | Service Class Name
 To install, use `pip`:
 
 ```bash
-pip install --upgrade "datastage>=0.0.2"
+pip install --upgrade "datastage>=0.0.3"
 ```
 
 ## Using the SDK
