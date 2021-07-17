@@ -73,7 +73,7 @@ pipeline {
               python3.7 -m pip install -U pip
               python3.7 -m pip install --upgrade pip setuptools twine
               python3.7 setup.py sdist
-              python3.7 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*  --username ${TWINE_USERNAME} --password ${TWINE_PASSWORD} --verbose
+              python3.7 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/* --username ${TWINE_USERNAME} --password ${TWINE_PASSWORD} --verbose
           '''
           //publishDocs()
         }
